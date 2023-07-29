@@ -1,22 +1,22 @@
 { pkgs, ... }:
 {
 
-  home-manager.users."vasco".home.sessionVariables.MANPAGER = "sh -c 'col -bx | bat -l man -p'";
+  home.sessionVariables.MANPAGER = "sh -c 'col -bx | bat -l man -p'";
 
-  home-manager.users."vasco".programs.zoxide = {
+  programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
     options = [ "--cmd cd" ];
   };
 
-  home-manager.users."vasco".programs.exa = {
+  programs.exa = {
     enable = true;
     enableAliases = true;
   };
 
-  home-manager.users."vasco".programs.bat.enable = true;
+  programs.bat.enable = true;
 
-  home-manager.users."vasco".programs.starship = {
+  programs.starship = {
     enable = true;
     enableZshIntegration = true;
     settings = {
@@ -31,8 +31,8 @@
     };
   };
 
-  programs.zsh.enable = true;
-  home-manager.users."vasco".programs.zsh = {
+  # programs.zsh.enable = true; For NixOS
+  programs.zsh = {
     enable = true;
     enableAutosuggestions = true;
     enableCompletion = true;

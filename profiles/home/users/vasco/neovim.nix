@@ -7,10 +7,10 @@ let
   ];
 in
 {
-  home-manager.users."vasco".home.packages = with pkgs; [
+  home.packages = with pkgs; [
     nodePackages.typescript
   ];
-  home-manager.users."vasco".programs.neovim = {
+  programs.neovim = {
     enable = true;
     viAlias = true;
     vimAlias = true;
@@ -157,6 +157,7 @@ in
       rust-analyzer
       clang-tools_15
       gopls
+      java-language-server
     ] ++ nodePkgs;
 
     extraLuaPackages = (ps: with ps; [
@@ -170,11 +171,7 @@ in
 
   };
 
-  environment.systemPackages = with pkgs; [
-    java-language-server
-  ];
-
-  home-manager.users."vasco".home.file."${config.home-manager.users."vasco".home.homeDirectory}/.config/nvim/lua/generic_lsp.lua".text = ''
+  home.file."${config.home.homeDirectory}/.config/nvim/lua/generic_lsp.lua".text = ''
           return function(client, bufnr)
     -- Enable completion triggered by <c-x><c-o>
       -- Mappings.

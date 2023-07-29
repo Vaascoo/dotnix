@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  home-manager.users."vasco".programs.foot = {
+  programs.foot = {
     enable = true;
     server.enable = true;
     settings = {

@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
 
-  home-manager.users."vasco".programs.git = {
+  programs.git = {
     enable = true;
     userEmail = "vcvasco1@gmail.com";
     userName = "Vaascoo";

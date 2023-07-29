@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  home-manager.users."vasco".gtk = {
+  gtk = {
     enable = true;
     iconTheme = {
       package = pkgs.papirus-icon-theme;

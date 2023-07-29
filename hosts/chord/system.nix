@@ -10,10 +10,8 @@
     general.fonts
     general.virt
     general.zfs
-    general.documentation
     general.pipewire
     general.wayland
-    general.nixconf
     restricted.vasco.tailscale
     restricted.vasco.hwAccel
     restricted.vasco.secureboot
@@ -92,6 +90,7 @@
   ];
 
   networking.firewall.enable = false;
+  programs.zsh.enable = true;
 
   hardware.bluetooth.enable = true;
 
@@ -105,14 +104,6 @@
 
   security.pki.certificateFiles = [ "${configDir}/certificates/ist.crt" "${configDir}/certificates/rnl.crt" "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" ];
 
-  # By luishfonseca:
-  # https://gist.github.com/luishfonseca/f183952a77e46ccd6ef7c907ca424517
-  system.activationScripts.diff = {
-    supportsDryActivation = true;
-    text = ''
-      ${pkgs.nvd}/bin/nvd --nix-bin-dir=${pkgs.nix}/bin diff /run/current-system "$systemConfig"
-    '';
-  };
 
   boot.supportedFilesystems = [ "ntfs" "zfs" ];
 

@@ -1,6 +1,6 @@
 { configDir, pkgs, ... }:
 {
-  home-manager.users."vasco".xdg.desktopEntries = {
+  xdg.desktopEntries = {
     notion = {
       name = "Notion";
       icon = "${configDir}/icons/Notion.png";

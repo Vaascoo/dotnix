@@ -37,27 +37,29 @@ let
 in
 {
 
-  imports = with profiles.home.users.vasco; [
-    streaming
-    ssh
-    fzf
-    foot
-    kitty
-    gtk
-    zsh
-    neovim
-    git
-    tmux
-    firefox
-    direnv
-  ];
-
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
+    extraSpecialArgs = {
+      inherit configDir;
+    };
   };
 
-  home-manager.users."vasco" = { pkgs, ... }: {
+  home-manager.users."vasco" = { pkgs, configDir, ... }: {
+    imports = with profiles.home.users.vasco; [
+      streaming
+      ssh
+      fzf
+      foot
+      kitty
+      gtk
+      zsh
+      neovim
+      git
+      tmux
+      firefox
+      direnv
+    ];
     home = {
       username = "vasco";
       homeDirectory = "/home/vasco";

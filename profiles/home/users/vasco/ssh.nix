@@ -9,7 +9,7 @@ let
   '';
 in
 {
-  home-manager.users."vasco".programs.ssh = {
+  programs.ssh = {
     enable = true;
     extraConfig = sshHome + (builtins.readFile "${configDir}/ssh/inesc");
   };

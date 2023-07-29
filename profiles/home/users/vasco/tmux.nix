@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
-  home-manager.users."vasco".programs.tmux = {
+  programs.tmux = {
     enable = true;
     plugins = with pkgs; [
       {
