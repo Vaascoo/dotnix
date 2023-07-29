@@ -26,7 +26,7 @@ in
       cmp-nvim-lsp
       cmp-treesitter
       cmp-git
-      nvim-lspconfig
+      pkgs.latest.vimPlugins.nvim-lspconfig
       molokai
       {
         plugin = nvim-dap;
@@ -159,6 +159,7 @@ in
       clang-tools_15
       gopls
       java-language-server
+      nixd
     ] ++ nodePkgs;
 
     extraLuaPackages = (ps: with ps; [

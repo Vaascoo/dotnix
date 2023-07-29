@@ -8,6 +8,10 @@
     nur.url = "github:nix-community/NUR";
     impermanence.url = "github:nix-community/impermanence/master";
     flake-utils.url = "github:numtide/flake-utils";
+    nixd = {
+      url = "github:nix-community/nixd";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home = {
       url = "github:nix-community/home-manager/release-23.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -38,7 +42,7 @@
         (final: prev: {
           unstable = mkPkgs inputs.unstable arch (arch: [ ]);
           latest = mkPkgs inputs.latest arch (arch: [ ]);
-          home-manager = inputs.home.packages."${arch}".home-manager;
+          nixd = inputs.nixd.packages."${arch}".default;
         })
         (import ./overlays/default.nix { inherit lib; pkgDir = ./packages; })
         inputs.nur.overlay

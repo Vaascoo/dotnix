@@ -194,7 +194,7 @@ require('lspconfig')['pyright'].setup {
   on_attach = require 'generic_lsp'
 }
 
-require('lspconfig')['nil_ls'].setup {
+require('lspconfig')['nixd'].setup {
   capabilities = capabilities,
   on_attach = require 'generic_lsp'
 }
