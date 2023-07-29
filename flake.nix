@@ -28,7 +28,6 @@
   outputs = inputs @ { ... }:
     let
       inherit (inputs.nixpkgs) lib;
-      inherit (inputs.home.lib) homeManagerConfiguration;
       inherit (inputs.home.nixosModules) home-manager;
       inherit (inputs.impermanence.nixosModules) impermanence;
       inherit (inputs.lanzaboote.nixosModules) lanzaboote;
