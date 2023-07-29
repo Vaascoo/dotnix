@@ -1,0 +1,88 @@
+{ pkgs, ... }:
+{
+
+  home-manager.users."vasco".home.sessionVariables.MANPAGER = "sh -c 'col -bx | bat -l man -p'";
+
+  home-manager.users."vasco".programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+    options = [ "--cmd cd" ];
+  };
+
+  home-manager.users."vasco".programs.exa = {
+    enable = true;
+    enableAliases = true;
+  };
+
+  home-manager.users."vasco".programs.bat.enable = true;
+
+  home-manager.users."vasco".programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+    settings = {
+      hostname = {
+        ssh_only = false;
+        format = "[@](yellow)[$hostname](bold blue) ";
+      };
+      username = {
+        show_always = true;
+        format = "[$user](red)";
+      };
+    };
+  };
+
+  programs.zsh.enable = true;
+  home-manager.users."vasco".programs.zsh = {
+    enable = true;
+    enableAutosuggestions = true;
+    enableCompletion = true;
+    enableSyntaxHighlighting = true;
+    autocd = true;
+    oh-my-zsh = {
+      enable = true;
+      plugins = [ "git" "docker" "systemd" "aws" ];
+    };
+    envExtra = ''
+      ENABLE_CORRECTION="true"
+    '';
+    initExtra = ''
+      source ${pkgs.nix-index}/etc/profile.d/command-not-found.sh
+
+      export PATH=$HOME/.config/emacs/bin:$PATH
+
+      evince() {
+        if [[ $@ > 0 ]]; then
+          ${pkgs.evince}/bin/evince $1 &>> /dev/null & disown
+        else
+          ${pkgs.evince}/bin/envice &>> /dev/null & disown
+        fi
+      }
+      bindkey -v
+    '';
+    shellAliases = {
+      l = "ls -algh";
+      ssh = "TERM=xterm-256color ssh";
+      less = "bat --style=plain";
+      xcopy = "xclip -i -selection clipboard";
+      xpaste = "xclip -o";
+      S = "exec $SHELL";
+      zathura = "evince";
+      programming = "cd ~/Documents/Programming";
+      nixconfig = "cd ~/.config/nix";
+      ignore = "${pkgs.git-ignore}/bin/git-ignore $(${pkgs.git-ignore}/bin/git-ignore -l 2> /dev/null | ${pkgs.fzf}/bin/fzf -m)";
+    };
+
+    plugins = [
+      {
+        name = "nix-zsh-completions";
+        file = "nix-zsh-completions.plugin.zsh";
+        src = pkgs.fetchFromGitHub {
+          owner = "spwhitt";
+          repo = "nix-zsh-completions";
+          rev = "0.4.4";
+          sha256 = "Djs1oOnzeVAUMrZObNLZ8/5zD7DjW3YK42SWpD2FPNk=";
+        };
+      }
+    ];
+  };
+}

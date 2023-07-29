@@ -1,0 +1,20 @@
+$TTL 86400
+
+@       IN      SOA     vaascoo.pt.      vcvasco1.gmail.com. (
+                        2023013001	; serial number YYMMDDNN
+                        28800           ; Refresh
+                        7200            ; Retry
+                        864000          ; Expire
+                        86400           ; Min TTL
+			)
+
+                NS      raft.vaascoo.pt. 
+
+
+$ORIGIN vaascoo.pt.
+
+; 
+192.168.222.1	IN	PTR	chord.vaascoo.pt
+192.168.222.2	IN	PTR	paxos.vaascoo.pt
+192.168.222.3	IN	PTR	raft.vaascoo.pt
+

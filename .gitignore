@@ -1,0 +1,11 @@
+.vscode
+venv
+.direnv
+.secrets
+
+
+### Created by https://www.gitignore.io
+### direnv ###
+.direnv
+.envrc
+
