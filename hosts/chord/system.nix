@@ -108,6 +108,7 @@
   boot.supportedFilesystems = [ "ntfs" "zfs" ];
 
   services.avahi.enable = true;
+  services.flatpak.enable = true;
 
   system.stateVersion = "22.05";
 
