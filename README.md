@@ -5,7 +5,7 @@ A little bit overengineered considering I don't have a lot of machines.
 ## Deploying
 ```sh
 git clone https://github.com/Vaascoo/dotnix.git
-cd nixconf
+cd dotnix
 # Something along the lines of:
 nixos-install --flake '.#<host>'
 nixos-rebuild switch --flake '.#<host>'
