@@ -106,6 +106,7 @@
 
 
   boot.supportedFilesystems = [ "ntfs" "zfs" ];
+  boot.binfmt.emulatedSystems = [ "armv6l-linux" ];
 
   services.avahi.enable = true;
   services.flatpak.enable = true;
