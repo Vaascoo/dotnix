@@ -31,6 +31,7 @@ in
   services.xserver.displayManager.gdm = {
     enable = true;
     autoSuspend = false;
+    wayland = true;
   };
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
 }
