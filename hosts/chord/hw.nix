@@ -10,14 +10,22 @@
     ];
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "usb_storage" "sd_mod" ];
-  boot.kernelParams = [
-    # "iommu=pt"
-  ];
   boot.initrd.kernelModules = [ "usbhid" ];
-  boot.kernelModules = [ "kvm-amd" ];
+  boot.kernelModules = [
+    "kvm-amd"
+  ];
+  boot.kernelParams = [
+    "quiet"
+  ];
   boot.extraModulePackages = [
     config.boot.zfs.package.latestCompatibleLinuxPackages.amdgpu-pro
   ];
+  boot.plymouth = {
+    enable = true;
+    themePackages = [ (pkgs.adi1090x-plymouth-themes.override { selected_themes = [ "splash" ]; }) ];
+    theme = "splash";
+  };
+  boot.initrd.systemd.enable = true;
   boot.supportedFilesystems = [ "zfs" ];
   boot.zfs.allowHibernation = true;
   boot.zfs.forceImportRoot = false;

@@ -1,6 +1,7 @@
 { pkgs, profiles, configDir, ... }:
 let
   installedPackages = with pkgs; [
+    diff-so-fancy
     helvum
     evince
     (unstable.discord.override { withOpenASAR = true; })
