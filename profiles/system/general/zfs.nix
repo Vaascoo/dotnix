@@ -1,8 +1,10 @@
 { config, pkgs, ... }:
 
 {
-  boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+  # try going back to a stable kernel to fix amdgpu errors on boot
+  # boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
   environment.persistence."/nix/persist" = {
+    hideMounts = true;
     directories = [
       "/etc/secureboot"
       "/etc/nixos"
@@ -12,8 +14,6 @@
       "/etc/ssh"
       "/etc/secrets"
     ];
-    files = [
-      "/etc/machine-id"
-    ];
   };
+  environment.etc."machine-id".source = "/nix/persist/etc/machine-id";
 }
