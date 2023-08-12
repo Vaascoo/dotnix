@@ -17,6 +17,7 @@ let
     blur-my-shell
     vitals
     pop-shell
+    dash-to-dock
   ];
 in
 {

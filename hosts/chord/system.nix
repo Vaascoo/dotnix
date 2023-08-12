@@ -18,6 +18,7 @@
     restricted.vasco.wireguard
     restricted.vasco.age
     restricted.vasco.gnome
+    restricted.vasco.keymap
   ];
 
   boot.loader.systemd-boot = {
