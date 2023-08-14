@@ -1,6 +1,7 @@
 { pkgs, profiles, configDir, ... }:
 let
   installedPackages = with pkgs; [
+    protonmail-bridge
     diff-so-fancy
     helvum
     evince
@@ -76,6 +77,13 @@ in
       homeDirectory = "/home/vasco";
       stateVersion = "22.05";
     };
+
+    systemd.user.services.protonmail-bridge = {
+      Unit.Description = "Proton Mail Bridge server";
+      Install.WantedBy = [ "graphical-session.target" ];
+      Service.ExecStart = "${pkgs.protonmail-bridge}/bin/protonmail-bridge -n";
+    };
+
     programs.home-manager.enable = true;
     home.packages = installedPackages;
     home.file.".ideavimrc" = {
