@@ -1,6 +1,7 @@
 { pkgs, profiles, configDir, ... }:
 let
   installedPackages = with pkgs; [
+    spotify-tui
     protonmail-bridge
     diff-so-fancy
     helvum
