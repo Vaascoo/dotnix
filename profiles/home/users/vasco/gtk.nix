@@ -9,7 +9,7 @@
     theme = {
       package = (pkgs.catppuccin-gtk.override {
         variant = "mocha";
-        accents = ["lavender"];
+        accents = [ "lavender" ];
       });
       name = "Catppuccin-Mocha-Standard-Lavender-Dark";
     };
