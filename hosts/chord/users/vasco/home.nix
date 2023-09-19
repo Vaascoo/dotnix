@@ -6,7 +6,8 @@ let
     diff-so-fancy
     helvum
     evince
-    (unstable.discord.override { withOpenASAR = true; })
+    # (unstable.discord.override { withOpenASAR = true; })
+    unstable.discord
     firefox
     vlc
     spotify
