@@ -1,13 +1,13 @@
 { pkgs, profiles, configDir, ... }:
 let
   installedPackages = with pkgs; [
+    obsidian
     spotify-tui
     protonmail-bridge
     diff-so-fancy
     helvum
     evince
-    # (unstable.discord.override { withOpenASAR = true; })
-    unstable.discord
+    (unstable.discord.override { withOpenASAR = true; })
     firefox
     vlc
     spotify
