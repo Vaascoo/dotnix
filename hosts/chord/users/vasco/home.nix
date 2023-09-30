@@ -1,7 +1,7 @@
 { pkgs, profiles, configDir, ... }:
 let
   installedPackages = with pkgs; [
-    obsidian
+    unstable.obsidian
     spotify-tui
     protonmail-bridge
     diff-so-fancy
