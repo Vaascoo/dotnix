@@ -7,7 +7,8 @@ let
     diff-so-fancy
     helvum
     evince
-    (unstable.discord.override { withOpenASAR = true; })
+    # move v to flatpak
+    # (unstable.discord.override { withOpenASAR = true; })
     firefox
     vlc
     spotify

@@ -3,15 +3,12 @@
   gtk = {
     enable = true;
     iconTheme = {
-      package = pkgs.papirus-icon-theme;
-      name = "Papirus-Dark";
+      package = pkgs.gnome.adwaita-icon-theme;
+      name = "Adwaita";
     };
     theme = {
-      package = (pkgs.catppuccin-gtk.override {
-        variant = "mocha";
-        accents = [ "lavender" ];
-      });
-      name = "Catppuccin-Mocha-Standard-Lavender-Dark";
+      package = pkgs.gnome.gnome-themes-extra;
+      name = "Adwaita-dark";
     };
   };
 }
