@@ -4,11 +4,13 @@ let
     eslint
     vscode-langservers-extracted
     typescript-language-server
+    bash-language-server
   ];
 in
 {
   home.packages = with pkgs; [
     nodePackages.typescript
+    shellcheck
   ];
   programs.neovim = {
     enable = true;

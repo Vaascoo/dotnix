@@ -208,3 +208,8 @@ require('lspconfig')['rust_analyzer'].setup {
   capabilities = capabilities,
   on_attach = require 'generic_lsp'
 }
+
+require('lspconfig')['bashls'].setup {
+  capabilities = capabilities,
+  on_attach = require 'generic_lsp'
+}

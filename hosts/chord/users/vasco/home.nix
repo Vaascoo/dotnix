@@ -34,7 +34,7 @@ let
     htop
     jetbrains.idea-ultimate
     (lutris.override { extraLibraries = pkgs: [ ]; })
-    wineWowPackages.waylandFull
+    unstable.wineWowPackages.waylandFull
     winetricks
     waypipe
     wl-clipboard
