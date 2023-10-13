@@ -10,6 +10,7 @@
       pull.rebase = true;
       init.defaultBranch = "main";
       url."git@github.com".pushinsteadOf = "https://github.com";
+      gpg.format = "ssh";
     };
 
     includes = [
@@ -18,6 +19,8 @@
         contents = {
           user.email = "vasco.correia@rnl.tecnico.ulisboa.pt";
           user.name = "Vasco Correia";
+          user.signingkey = "~/.ssh/id_ed25519_sign.pub";
+          commit.sign = "true";
         };
       }
       {
@@ -25,6 +28,8 @@
         contents = {
           user.email = "vasco.correia@rnl.tecnico.ulisboa.pt";
           user.name = "Vaascoo";
+          user.signingkey = "~/.ssh/id_ed25519_sign.pub";
+          commit.sign = "true";
         };
       }
     ];
