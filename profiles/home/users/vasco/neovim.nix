@@ -11,6 +11,7 @@ in
   home.packages = with pkgs; [
     nodePackages.typescript
     shellcheck
+    ansible-lint
   ];
   programs.neovim = {
     enable = true;
@@ -179,6 +180,8 @@ in
       gopls
       java-language-server
       nixd
+      ansible-language-server
+      terraform-lsp
     ] ++ nodePkgs;
 
     extraLuaPackages = (ps: with ps; [

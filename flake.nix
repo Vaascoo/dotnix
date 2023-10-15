@@ -9,7 +9,7 @@
     impermanence.url = "github:nix-community/impermanence/master";
     flake-utils.url = "github:numtide/flake-utils";
     nixd = {
-      url = "github:nix-community/nixd";
+      url = "github:nix-community/nixd/release/1.2";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home = {

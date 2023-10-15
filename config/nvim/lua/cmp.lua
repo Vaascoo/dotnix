@@ -213,3 +213,13 @@ require('lspconfig')['bashls'].setup {
   capabilities = capabilities,
   on_attach = require 'generic_lsp'
 }
+
+require('lspconfig')['ansiblels'].setup {
+  capabilities = capabilities,
+  on_attach = require 'generic_lsp'
+}
+
+require('lspconfig')['terraform_lsp'].setup {
+  capabilities = capabilities,
+  on_attach = require 'generic_lsp'
+}
