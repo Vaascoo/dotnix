@@ -149,14 +149,10 @@ cmp.setup.cmdline(':', {
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
 
-require('lspconfig')['lua_ls'].setup {
-  capabilities = capabilities,
-  on_attach = require 'generic_lsp'
-}
+require('lspconfig')['lua_ls'].setup {}
 
 
 require('lspconfig')['eslint'].setup {
-  capabilities = capabilities,
   filetypes = {
     "javascript",
     "javascriptreact",
@@ -166,60 +162,27 @@ require('lspconfig')['eslint'].setup {
     "jsx",
     "html"
   },
-  on_attach = require 'generic_lsp'
 }
-require('lspconfig')['clangd'].setup {
-  capabilities = capabilities,
-  on_attach = require 'generic_lsp'
-}
+require('lspconfig')['clangd'].setup {}
 
 require('lspconfig')['java_language_server'].setup {
-  capabilities = capabilities,
-  on_attach = require 'generic_lsp',
   cmd = { 'java-language-server' }
 }
 
-require 'lspconfig'.kotlin_language_server.setup {
-  capabilities = capabilities,
-  on_attach = require 'generic_lsp'
-}
+require 'lspconfig'.kotlin_language_server.setup {}
 
-require 'lspconfig'.tsserver.setup {
-  capabilities = capabilities,
-  on_attach = require 'generic_lsp'
-}
+require 'lspconfig'.tsserver.setup {}
 
-require('lspconfig')['pyright'].setup {
-  capabilities = capabilities,
-  on_attach = require 'generic_lsp'
-}
+require('lspconfig')['pyright'].setup {}
 
-require('lspconfig')['nixd'].setup {
-  capabilities = capabilities,
-  on_attach = require 'generic_lsp'
-}
+require('lspconfig')['nixd'].setup {}
 
-require('lspconfig')['gopls'].setup {
-  capabilities = capabilities,
-  on_attach = require 'generic_lsp'
-}
+require('lspconfig')['gopls'].setup {}
 
-require('lspconfig')['rust_analyzer'].setup {
-  capabilities = capabilities,
-  on_attach = require 'generic_lsp'
-}
+require('lspconfig')['rust_analyzer'].setup {}
 
-require('lspconfig')['bashls'].setup {
-  capabilities = capabilities,
-  on_attach = require 'generic_lsp'
-}
+require('lspconfig')['bashls'].setup {}
 
-require('lspconfig')['ansiblels'].setup {
-  capabilities = capabilities,
-  on_attach = require 'generic_lsp'
-}
+require('lspconfig')['ansiblels'].setup {}
 
-require('lspconfig')['terraform_lsp'].setup {
-  capabilities = capabilities,
-  on_attach = require 'generic_lsp'
-}
+require('lspconfig')['terraform_lsp'].setup {}
