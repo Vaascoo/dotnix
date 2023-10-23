@@ -13,6 +13,7 @@
       "/var/log"
       "/etc/ssh"
       "/etc/secrets"
+      "/etc/gitlab-runner"
     ];
   };
   environment.etc."machine-id".source = "/nix/persist/etc/machine-id";
