@@ -69,6 +69,7 @@
       zathura = "evince";
       programming = "cd ~/Documents/Programming";
       nixconfig = "cd ~/.config/nix";
+      tf = "terraform";
       ignore = "${pkgs.git-ignore}/bin/git-ignore $(${pkgs.git-ignore}/bin/git-ignore -l 2> /dev/null | ${pkgs.fzf}/bin/fzf -m)";
     };
 
