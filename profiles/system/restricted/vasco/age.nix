@@ -13,6 +13,10 @@
         file = "${configDir}/secrets/runner.age";
         mode = "0600";
       };
+      ovhCreds = lib.mkIf (config.services.nginx.enable) {
+        file = "${configDir}/secrets/ovh.age";
+        mode = "0600";
+      };
     };
   };
 }

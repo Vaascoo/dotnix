@@ -5,4 +5,5 @@ in
 {
   "wireguard.age".publicKeys = [ vasco ];
   "runner.age".publicKeys = [ vasco raft ];
+  "ovh.age".publicKeys = [ vasco raft ];
 }

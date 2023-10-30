@@ -15,6 +15,7 @@
     restricted.vasco.tailscale
     restricted.vasco.hwAccel
     # restricted.vasco.secureboot
+    restricted.vasco.acme
     restricted.vasco.ssh
     restricted.vasco.sshKeys
     restricted.vasco.age
@@ -97,6 +98,20 @@
     configFile = config.age.secrets.gitlabRunner.path;
   };
 
+  #TODO this will be moved from here
+  services.nginx = {
+    enable = true;
+
+    virtualHosts = {
+      "prometheus.vaascoo.pt" = {
+        forceSSL = true;
+        useACMEHost = "vaascoo.pt";
+        locations."/".proxyPass = "http://127.0.0.1:8000";
+      };
+    };
+  };
+  users.users.nginx.extraGroups = [ "acme" ];
+
   networking.firewall.enable = false;
   programs.zsh.enable = true;
 
@@ -111,7 +126,6 @@
   services.dbus.enable = true;
 
   security.pki.certificateFiles = [ "${configDir}/certificates/ist.crt" "${configDir}/certificates/rnl.crt" "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" ];
-
 
   boot.supportedFilesystems = [ "ntfs" "zfs" ];
   boot.binfmt.emulatedSystems = [ "armv6l-linux" ];

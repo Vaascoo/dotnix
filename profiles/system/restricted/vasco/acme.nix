@@ -2,7 +2,7 @@
 {
   security.acme = {
     acceptTerms = true;
-    defaults.email = "vcvasco1@gmail.com";
+    defaults.email = "self@vaascoo.pt";
 
     certs."vaascoo.pt" = {
       domain = "vaascoo.pt";
