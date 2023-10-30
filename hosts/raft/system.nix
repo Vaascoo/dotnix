@@ -16,6 +16,7 @@
     restricted.vasco.hwAccel
     # restricted.vasco.secureboot
     restricted.vasco.acme
+    restricted.vasco.gitea
     restricted.vasco.ssh
     restricted.vasco.sshKeys
     restricted.vasco.age
@@ -103,10 +104,10 @@
     enable = true;
 
     virtualHosts = {
-      "prometheus.vaascoo.pt" = {
+      "git.vaascoo.pt" = {
         forceSSL = true;
         useACMEHost = "vaascoo.pt";
-        locations."/".proxyPass = "http://127.0.0.1:8000";
+        locations."/".proxyPass = "http://127.0.0.1:3000";
       };
     };
   };
