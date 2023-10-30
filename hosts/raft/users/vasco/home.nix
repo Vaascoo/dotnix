@@ -7,7 +7,9 @@ let
     diff-so-fancy
     helvum
     evince
-    unstable.webcord
+    (webcord.override {
+      electron_24 = pkgs.unstable.electron_27;
+    })
     firefox
     vlc
     spotify
