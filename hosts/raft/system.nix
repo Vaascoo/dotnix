@@ -15,7 +15,7 @@
     restricted.vasco.tailscale
     restricted.vasco.hwAccel
     # restricted.vasco.secureboot
-    # restricted.vasco.wireguard
+    restricted.vasco.ssh
     restricted.vasco.age
     restricted.vasco.gnome
     restricted.vasco.keymap
