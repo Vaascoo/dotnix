@@ -40,7 +40,7 @@
     autocd = true;
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "docker" "systemd" "aws" ];
+      plugins = [ "git" "docker" "systemd" "aws" "gcloud" "kubectl" ];
     };
     envExtra = ''
       ENABLE_CORRECTION="true"

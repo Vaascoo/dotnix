@@ -9,6 +9,10 @@
         file = "${configDir}/secrets/wireguard.age";
         mode = "0600";
       };
+      gitlabRunner = {
+        file = "${configDir}/secrets/runner.age";
+        mode = "0600";
+      };
     };
   };
 }

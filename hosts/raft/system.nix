@@ -93,6 +93,7 @@
   services.gitlab-runner = {
     enable = true;
     clear-docker-cache.enable = true;
+    configFile = config.age.secrets.gitlabRunner.path;
   };
 
   networking.firewall.enable = false;
