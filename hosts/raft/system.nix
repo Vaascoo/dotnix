@@ -16,6 +16,7 @@
     restricted.vasco.hwAccel
     # restricted.vasco.secureboot
     restricted.vasco.ssh
+    restricted.vasco.sshKeys
     restricted.vasco.age
     restricted.vasco.gnome
     restricted.vasco.keymap
