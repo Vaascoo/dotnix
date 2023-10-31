@@ -1,13 +1,13 @@
 { pkgs, profiles, configDir, ... }:
 let
   installedPackages = with pkgs; [
-    unstable.obsidian
+    vasco.obsidian
     spotify-tui
     protonmail-bridge
     diff-so-fancy
     helvum
     evince
-    webcord
+    unstable.webcord
     firefox
     vlc
     spotify
