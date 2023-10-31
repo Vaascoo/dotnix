@@ -1,9 +1,11 @@
-{ lib, pkgs, ... }:
-
 {
+  lib,
+  pkgs,
+  ...
+}: {
   boot.bootspec.enable = true;
 
-  environment.systemPackages = with pkgs; [ sbctl ];
+  environment.systemPackages = with pkgs; [sbctl];
 
   boot.loader.systemd-boot.enable = lib.mkForce false;
 

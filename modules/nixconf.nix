@@ -1,5 +1,8 @@
-{ pkgs, inputs, ... }:
 {
+  pkgs,
+  inputs,
+  ...
+}: {
   nix = {
     package = pkgs.unstable.nix;
     registry.nixpkgs.flake = inputs.unstable;
@@ -15,7 +18,7 @@
       automatic = true;
       dates = "weekly";
     };
-    settings.experimental-features = [ "nix-command" "flakes" ];
+    settings.experimental-features = ["nix-command" "flakes"];
   };
 
   environment.etc."channels/nixpkgs".source = inputs.unstable.outPath;

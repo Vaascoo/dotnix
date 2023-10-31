@@ -1,15 +1,15 @@
-{ stdenv
-, fetchurl
-, lib
-, makeWrapper
-, electron
-, makeDesktopItem
-, imagemagick
-, writeScript
-, undmg
-, unzip
-}:
-let
+{
+  stdenv,
+  fetchurl,
+  lib,
+  makeWrapper,
+  electron,
+  makeDesktopItem,
+  imagemagick,
+  writeScript,
+  undmg,
+  unzip,
+}: let
   inherit (stdenv.hostPlatform) system;
   pname = "obsidian";
   version = "1.4.16";
@@ -19,13 +19,19 @@ let
     homepage = "https://obsidian.md";
     downloadPage = "https://github.com/obsidianmd/obsidian-releases/releases";
     license = licenses.obsidian;
-    maintainers = with maintainers; [ atila conradmearns zaninime qbit kashw2 ];
+    maintainers = with maintainers; [atila conradmearns zaninime qbit kashw2];
   };
 
-  filename = if stdenv.isDarwin then "Obsidian-${version}-universal.dmg" else "obsidian-${version}.tar.gz";
+  filename =
+    if stdenv.isDarwin
+    then "Obsidian-${version}-universal.dmg"
+    else "obsidian-${version}.tar.gz";
   src = fetchurl {
     url = "https://github.com/obsidianmd/obsidian-releases/releases/download/v${version}/${filename}";
-    hash = if stdenv.isDarwin then "sha256-5cVKlZJDtXOkil+RohijCcqyJVTrysmqyTvJR0dDAuc=" else "sha256-PBKLGs3MZyarSMiWnjqY7d9bQrKu2uLAvLUufpHLxcw=";
+    hash =
+      if stdenv.isDarwin
+      then "sha256-5cVKlZJDtXOkil+RohijCcqyJVTrysmqyTvJR0dDAuc="
+      else "sha256-PBKLGs3MZyarSMiWnjqY7d9bQrKu2uLAvLUufpHLxcw=";
   };
 
   icon = fetchurl {
@@ -39,14 +45,14 @@ let
     comment = "Knowledge base";
     icon = "obsidian";
     exec = "obsidian %u";
-    categories = [ "Office" ];
-    mimeTypes = [ "x-scheme-handler/obsidian" ];
+    categories = ["Office"];
+    mimeTypes = ["x-scheme-handler/obsidian"];
   };
 
   linux = stdenv.mkDerivation {
     inherit pname version src desktopItem icon;
-    meta = meta // { platforms = [ "x86_64-linux" "aarch64-linux" ]; };
-    nativeBuildInputs = [ makeWrapper imagemagick ];
+    meta = meta // {platforms = ["x86_64-linux" "aarch64-linux"];};
+    nativeBuildInputs = [makeWrapper imagemagick];
     installPhase = ''
       runHook preInstall
       mkdir -p $out/bin
@@ -75,9 +81,9 @@ let
 
   darwin = stdenv.mkDerivation {
     inherit pname version src appname;
-    meta = meta // { platforms = [ "x86_64-darwin" "aarch64-darwin" ]; };
+    meta = meta // {platforms = ["x86_64-darwin" "aarch64-darwin"];};
     sourceRoot = "${appname}.app";
-    nativeBuildInputs = [ makeWrapper undmg unzip ];
+    nativeBuildInputs = [makeWrapper undmg unzip];
     installPhase = ''
       runHook preInstall
       mkdir -p $out/{Applications/${appname}.app,bin}
@@ -87,4 +93,6 @@ let
     '';
   };
 in
-if stdenv.isDarwin then darwin else linux
+  if stdenv.isDarwin
+  then darwin
+  else linux

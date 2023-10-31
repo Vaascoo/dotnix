@@ -1,5 +1,6 @@
-{ fetchFromGitHub
-, mkTmuxPlugin
+{
+  fetchFromGitHub,
+  mkTmuxPlugin,
 }:
 mkTmuxPlugin {
   pluginName = "catppuccin";

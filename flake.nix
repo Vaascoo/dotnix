@@ -29,69 +29,78 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = inputs @ { ... }:
-    let
-      inherit (inputs.nixpkgs) lib;
-      inherit (inputs.home.nixosModules) home-manager;
-      inherit (inputs.impermanence.nixosModules) impermanence;
-      inherit (inputs.lanzaboote.nixosModules) lanzaboote;
-      inherit (inputs.agenix.nixosModules) age;
-      inherit (inputs.nixos-mailserver.nixosModules) mailserver;
+  outputs = inputs @ {...}: let
+    inherit (inputs.nixpkgs) lib;
+    inherit (inputs.home.nixosModules) home-manager;
+    inherit (inputs.impermanence.nixosModules) impermanence;
+    inherit (inputs.lanzaboote.nixosModules) lanzaboote;
+    inherit (inputs.agenix.nixosModules) age;
+    inherit (inputs.nixos-mailserver.nixosModules) mailserver;
 
-      _overlays = arch: [
-        (final: prev: {
-          unstable = mkPkgs inputs.unstable arch (arch: [ ]);
-          latest = mkPkgs inputs.latest arch (arch: [ ]);
-          nixd = inputs.nixd.packages."${arch}".default;
-        })
-        (import ./overlays/default.nix { inherit lib; pkgDir = ./packages; })
-        inputs.nur.overlay
-        inputs.agenix.overlays.default
-      ];
+    _overlays = arch: [
+      (final: prev: {
+        unstable = mkPkgs inputs.unstable arch (arch: []);
+        latest = mkPkgs inputs.latest arch (arch: []);
+        nixd = inputs.nixd.packages."${arch}".default;
+      })
+      (import ./overlays/default.nix {
+        inherit lib;
+        pkgDir = ./packages;
+      })
+      inputs.nur.overlay
+      inputs.agenix.overlays.default
+    ];
 
-      mkPkgs = pkgs: arch: userOverlays: import pkgs {
+    mkPkgs = pkgs: arch: userOverlays:
+      import pkgs {
         system = arch;
         config.allowUnfree = true;
         config.hardware.enableAllFirmware = true;
         overlays = userOverlays arch;
       };
 
-      mkShells = dir: { };
+    mkShells = dir: {};
 
-      importRecursive = dir:
-        let
-          entries = lib.filesystem.listFilesRecursive dir;
-        in
-        if (builtins.pathExists dir) then
-          builtins.map
-            (entry: (import entry))
-            (builtins.filter (entry: lib.hasSuffix ".nix" entry) entries)
-        else [ ];
+    importRecursive = dir: let
+      entries = lib.filesystem.listFilesRecursive dir;
+    in
+      if (builtins.pathExists dir)
+      then
+        builtins.map
+        (entry: (import entry))
+        (builtins.filter (entry: lib.hasSuffix ".nix" entry) entries)
+      else [];
 
-      importAll = path: { }; # import all .nix files in path
-      importIfExists = path:
-        if (builtins.pathExists path) then [ (import "${path}") ]
-        else
-          [ ];
+    importAll = path: {}; # import all .nix files in path
+    importIfExists = path:
+      if (builtins.pathExists path)
+      then [(import "${path}")]
+      else [];
 
-      mkProfiles = dir:
-        let
-          mkLevel = entry: type:
-            if (lib.hasSuffix ".nix" entry && type == "regular") then
-              (import "${dir}/${entry}")
-            else if type == "directory" then mkProfiles "${dir}/${entry}"
-            else { };
-          doMagic = key: value: lib.attrsets.nameValuePair
-            (lib.removeSuffix ".nix" key)
-            (mkLevel key value);
-        in
-        lib.attrsets.mapAttrs' doMagic (builtins.readDir dir);
+    mkProfiles = dir: let
+      mkLevel = entry: type:
+        if (lib.hasSuffix ".nix" entry && type == "regular")
+        then (import "${dir}/${entry}")
+        else if type == "directory"
+        then mkProfiles "${dir}/${entry}"
+        else {};
+      doMagic = key: value:
+        lib.attrsets.nameValuePair
+        (lib.removeSuffix ".nix" key)
+        (mkLevel key value);
+    in
+      lib.attrsets.mapAttrs' doMagic (builtins.readDir dir);
 
-      _modules = importRecursive ./modules;
+    _modules = importRecursive ./modules;
 
-      _profiles = mkProfiles ./profiles;
+    _profiles = mkProfiles ./profiles;
 
-      mkHost = { name, arch, dir }: lib.nixosSystem {
+    mkHost = {
+      name,
+      arch,
+      dir,
+    }:
+      lib.nixosSystem {
         system = arch;
         pkgs = mkPkgs inputs.nixpkgs arch _overlays;
         specialArgs = {
@@ -99,36 +108,40 @@
           profiles = _profiles;
           configDir = ./config;
         };
-        modules = [
-          { networking.hostName = name; } # timezone missing, don't forget
-          home-manager
-          impermanence
-          age
-          lanzaboote
-          mailserver
-        ] ++ (importRecursive dir) ++ _modules;
+        modules =
+          [
+            {networking.hostName = name;} # timezone missing, don't forget
+            home-manager
+            impermanence
+            age
+            lanzaboote
+            mailserver
+          ]
+          ++ (importRecursive dir)
+          ++ _modules;
       };
 
-      mkHosts = dir:
-        let
-          filterHosts = hosts: lib.attrsets.filterAttrs (key: value: value == "directory") hosts;
-          getArch = host:
-            let
-              archFile = "${dir}/${host}/arch";
-            in
-            if builtins.pathExists archFile then builtins.readFile archFile else "x86_64-linux";
-        in
-        lib.attrsets.mapAttrs
-          (entry: type:
-            mkHost {
-              name = entry;
-              arch = (getArch entry);
-              dir = "${dir}/${entry}";
-            })
-          (filterHosts (builtins.readDir dir));
+    mkHosts = dir: let
+      filterHosts = hosts: lib.attrsets.filterAttrs (key: value: value == "directory") hosts;
+      getArch = host: let
+        archFile = "${dir}/${host}/arch";
+      in
+        if builtins.pathExists archFile
+        then builtins.readFile archFile
+        else "x86_64-linux";
     in
-    {
-      nixosConfigurations = mkHosts ./hosts;
-      devShells = mkShells ./shells;
-    };
+      lib.attrsets.mapAttrs
+      (entry: type:
+        mkHost {
+          name = entry;
+          arch = getArch entry;
+          dir = "${dir}/${entry}";
+        })
+      (filterHosts (builtins.readDir dir));
+  in {
+    nixosConfigurations = mkHosts ./hosts;
+    devShells = mkShells ./shells;
+    # TODO change this to be system agnostic
+    formatter.x86_64-linux = inputs.nixpkgs.legacyPackages.x86_64-linux.alejandra;
+  };
 }

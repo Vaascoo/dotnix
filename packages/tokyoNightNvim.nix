@@ -1,4 +1,8 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  ...
+}:
 pkgs.vimUtils.buildVimPluginFrom2Nix {
   name = "tokyonight-nvim";
   src = pkgs.fetchFromGitHub {

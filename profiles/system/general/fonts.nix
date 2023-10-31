@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   fonts = {
     enableDefaultFonts = true;
     fonts = with pkgs; [
@@ -10,11 +9,11 @@
       source-han-sans
       source-han-sans-japanese
       source-han-serif-japanese
-      (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+      (nerdfonts.override {fonts = ["JetBrainsMono"];})
     ];
     fontconfig.defaultFonts = {
-      serif = [ "Noto Serif" "Source Han Serif" ];
-      sansSerif = [ "Noto Sans" "Source Han Sans" ];
+      serif = ["Noto Serif" "Source Han Serif"];
+      sansSerif = ["Noto Sans" "Source Han Sans"];
     };
   };
 }

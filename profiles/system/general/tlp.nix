@@ -1,7 +1,5 @@
-{ pkgs, ... }:
-
-{
-  environment.systemPackages = [ pkgs.tlp pkgs.powertop ];
+{pkgs, ...}: {
+  environment.systemPackages = [pkgs.tlp pkgs.powertop];
   powerManagement.powertop.enable = true;
   services.power-profiles-daemon.enable = false;
   services.tlp = {

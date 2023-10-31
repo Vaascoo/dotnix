@@ -1,5 +1,9 @@
-{ pkgs, profiles, configDir, ... }:
-let
+{
+  pkgs,
+  profiles,
+  configDir,
+  ...
+}: let
   installedPackages = with pkgs; [
     vasco.obsidian
     spotify-tui
@@ -32,7 +36,7 @@ let
     brave
     htop
     jetbrains.idea-ultimate
-    (lutris.override { extraLibraries = pkgs: [ ]; })
+    (lutris.override {extraLibraries = pkgs: [];})
     unstable.wineWowPackages.waylandFull
     winetricks
     waypipe
@@ -44,8 +48,7 @@ let
     gnumake
     gcc
   ];
-in
-{
+in {
   programs.steam.enable = true;
   services.emacs = {
     enable = true;
@@ -60,7 +63,11 @@ in
     };
   };
 
-  home-manager.users."vasco" = { pkgs, configDir, ... }: {
+  home-manager.users."vasco" = {
+    pkgs,
+    configDir,
+    ...
+  }: {
     imports = with profiles.home.users.vasco; [
       streaming
       ssh
@@ -83,7 +90,7 @@ in
 
     systemd.user.services.protonmail-bridge = {
       Unit.Description = "Proton Mail Bridge server";
-      Install.WantedBy = [ "graphical-session.target" ];
+      Install.WantedBy = ["graphical-session.target"];
       Service.ExecStart = "${pkgs.protonmail-bridge}/bin/protonmail-bridge -n";
     };
 
@@ -94,4 +101,4 @@ in
       text = builtins.readFile "${configDir}/nvim/init.vim";
     };
   };
-} 
+}

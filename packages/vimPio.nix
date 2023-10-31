@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{pkgs, ...}:
 pkgs.vimUtils.buildVimPluginFrom2Nix {
   name = "vim-pio";
   src = pkgs.fetchFromGitHub {

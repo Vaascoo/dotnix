@@ -1,6 +1,7 @@
-{ fetchFromGitHub
-, mkTmuxPlugin
-, lib
+{
+  fetchFromGitHub,
+  mkTmuxPlugin,
+  lib,
 }:
 mkTmuxPlugin {
   pluginName = "tokyo-night-tmux";

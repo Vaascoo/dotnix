@@ -1,12 +1,10 @@
-{ pkgs, ... }:
-{
-
+{pkgs, ...}: {
   home.sessionVariables.MANPAGER = "sh -c 'col -bx | bat -l man -p'";
 
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
-    options = [ "--cmd cd" ];
+    options = ["--cmd cd"];
   };
 
   programs.exa = {
@@ -40,7 +38,7 @@
     autocd = true;
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "docker" "systemd" "aws" "gcloud" "kubectl" ];
+      plugins = ["git" "docker" "systemd" "aws" "gcloud" "kubectl"];
     };
     envExtra = ''
       ENABLE_CORRECTION="true"

@@ -1,6 +1,9 @@
-{ config, lib, pkgs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   programs.tmux = {
     enable = true;
     plugins = with pkgs; [
@@ -31,5 +34,4 @@
       set -sg escape-time 10
     '';
   };
-
 }

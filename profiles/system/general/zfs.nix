@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   # try going back to a stable kernel to fix amdgpu errors on boot
   # boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
   environment.persistence."/nix/persist" = {

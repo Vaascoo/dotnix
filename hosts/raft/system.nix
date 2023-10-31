@@ -1,10 +1,13 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, configDir, pkgs, profiles, ... }:
-
 {
+  config,
+  configDir,
+  pkgs,
+  profiles,
+  ...
+}: {
   imports = with profiles.system; [
     general.doh
     general.fonts
@@ -53,7 +56,7 @@
   users.users.vasco = {
     isNormalUser = true;
     description = "Vasco Correia"; # full name in gdm
-    extraGroups = [ "audio" "docker" "video" "wheel" "networkmanager" "libvirtd" "dialout" ]; # Enable ‘sudo’ for the user.
+    extraGroups = ["audio" "docker" "video" "wheel" "networkmanager" "libvirtd" "dialout"]; # Enable ‘sudo’ for the user.
     initialHashedPassword = "$6$DzeNGzM3T9/NALiy$iHZ.pTMGbqhdMzcpwTuZ8dM6zGGoH.7M/m5GBAK5v3tdg2rpYcnSq8k3VlEwsvbOjv/fcK2BR7E8yt69nE9BR/";
     shell = pkgs.zsh;
   };
@@ -111,7 +114,7 @@
       };
     };
   };
-  users.users.nginx.extraGroups = [ "acme" ];
+  users.users.nginx.extraGroups = ["acme"];
 
   networking.firewall.enable = false;
   programs.zsh.enable = true;
@@ -126,14 +129,13 @@
 
   services.dbus.enable = true;
 
-  security.pki.certificateFiles = [ "${configDir}/certificates/ist.crt" "${configDir}/certificates/rnl.crt" "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" ];
+  security.pki.certificateFiles = ["${configDir}/certificates/ist.crt" "${configDir}/certificates/rnl.crt" "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"];
 
-  boot.supportedFilesystems = [ "ntfs" "zfs" ];
-  boot.binfmt.emulatedSystems = [ "armv6l-linux" ];
+  boot.supportedFilesystems = ["ntfs" "zfs"];
+  boot.binfmt.emulatedSystems = ["armv6l-linux"];
 
   services.avahi.enable = true;
   services.flatpak.enable = true;
 
   system.stateVersion = "22.05";
-
 }
