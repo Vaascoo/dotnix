@@ -9,5 +9,4 @@
   vasco.vimPio = final.callPackage ../packages/vimPio.nix {};
   vasco.aquarium-nvim = final.callPackage ../packages/aquarium-nvim.nix {};
   vasco.tokyoNightNvim = final.callPackage ../packages/tokyoNightNvim.nix {};
-  vasco.obsidian = final.callPackage ../packages/obsidian.nix {electron = prev.unstable.electron_27;};
 }
