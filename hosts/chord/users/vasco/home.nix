@@ -71,6 +71,7 @@ in {
     ...
   }: {
     imports = with profiles.home.users.vasco; [
+      dconf
       streaming
       ssh
       fzf
