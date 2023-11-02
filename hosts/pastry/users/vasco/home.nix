@@ -51,6 +51,7 @@
     gcc
   ];
 in {
+  programs.steam.enable = true;
   services.emacs = {
     enable = true;
     package = pkgs.emacs28NativeComp; # replace with emacs-gtk, or a version provided by the community overlay if desired.
