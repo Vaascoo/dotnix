@@ -93,11 +93,6 @@
     gnome.seahorse
   ];
 
-  services.gitlab-runner = {
-    enable = true;
-    clear-docker-cache.enable = true;
-  };
-
   networking.firewall.enable = false;
   programs.zsh.enable = true;
 
