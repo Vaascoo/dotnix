@@ -18,10 +18,10 @@
     restricted.vasco.tailscale
     restricted.vasco.hwAccel
     # restricted.vasco.secureboot
-    # restricted.vasco.wireguard
     restricted.vasco.age
     restricted.vasco.gnome
     restricted.vasco.keymap
+    restricted.vasco.disable_suspend
   ];
 
   boot.loader.systemd-boot = {
