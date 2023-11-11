@@ -18,6 +18,7 @@
     restricted.vasco.tailscale
     restricted.vasco.hwAccel
     # restricted.vasco.secureboot
+    restricted.vasco.disable_suspend
     restricted.vasco.acme
     restricted.vasco.gitea
     restricted.vasco.ssh

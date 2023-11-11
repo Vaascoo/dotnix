@@ -10,4 +10,9 @@
     hibernate.enable = false;
     hybrid-sleep.enable = false;
   };
+  services.logind = {
+    lidSwitch = "lock";
+    lidSwitchDocked = "ignore";
+    lidSwitchExternalPower = "ignore";
+  };
 }
