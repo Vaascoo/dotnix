@@ -87,15 +87,6 @@ with lib.hm.gvariant; {
       translate = true;
     };
 
-    "org/gnome/desktop/background" = {
-      color-shading-type = "solid";
-      picture-options = "zoom";
-      picture-uri = "file:///home/vasco/.local/share/backgrounds/2023-03-06-01-40-06-crosswalk.jpg";
-      picture-uri-dark = "file:///home/vasco/.local/share/backgrounds/2023-03-06-01-40-06-crosswalk.jpg";
-      primary-color = "#000000000000";
-      secondary-color = "#000000000000";
-    };
-
     "org/gnome/desktop/input-sources" = {
       sources = [(mkTuple ["xkb" "pt"]) (mkTuple ["xkb" "us"])];
       xkb-options = ["terminate:ctrl_alt_bksp"];
@@ -226,14 +217,6 @@ with lib.hm.gvariant; {
     "org/gnome/desktop/privacy" = {
       old-files-age = mkUint32 30;
       recent-files-max-age = -1;
-    };
-
-    "org/gnome/desktop/screensaver" = {
-      color-shading-type = "solid";
-      picture-options = "zoom";
-      picture-uri = "file:///home/vasco/.local/share/backgrounds/2023-03-06-01-40-06-crosswalk.jpg";
-      primary-color = "#000000000000";
-      secondary-color = "#000000000000";
     };
 
     "org/gnome/desktop/session" = {
