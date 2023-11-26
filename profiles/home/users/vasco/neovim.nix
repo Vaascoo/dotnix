@@ -10,11 +10,16 @@
     typescript-language-server
     bash-language-server
   ];
+  treeSitterGrammars = [];
 in {
   home.packages = with pkgs; [
     nodePackages.typescript
     shellcheck
     ansible-lint
+    typst
+    typst-lsp
+    typst-fmt
+    go
   ];
   programs.neovim = {
     enable = true;

@@ -186,3 +186,13 @@ require('lspconfig')['bashls'].setup {}
 require('lspconfig')['ansiblels'].setup {}
 
 require('lspconfig')['terraform_lsp'].setup {}
+
+require('lspconfig')['typst_lsp'].setup {
+  settings = {
+    exportPdf = "onSave",
+  },
+  filetypes = {
+    "typst",
+    "typ"
+  },
+}
