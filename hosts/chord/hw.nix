@@ -28,7 +28,6 @@
     themePackages = [(pkgs.adi1090x-plymouth-themes.override {selected_themes = ["splash"];})];
     theme = "splash";
   };
-  boot.initrd.systemd.enable = true;
   boot.supportedFilesystems = ["zfs"];
   boot.zfs.allowHibernation = true;
   boot.zfs.forceImportRoot = false;

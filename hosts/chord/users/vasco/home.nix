@@ -5,15 +5,15 @@
   ...
 }: let
   installedPackages = with pkgs; [
-    unstable.obsidian
+    (unstable.obsidian.override {
+      electron = pkgs.unstable.electron_28;
+    })
     spotify-tui
     protonmail-bridge
     diff-so-fancy
     helvum
     evince
-    (webcord.override {
-      electron_24 = pkgs.unstable.electron_27;
-    })
+    unstable.webcord
     firefox
     vlc
     spotify
