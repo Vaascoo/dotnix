@@ -5,9 +5,6 @@
   ...
 }: let
   installedPackages = with pkgs; [
-    (unstable.obsidian.override {
-      electron = pkgs.unstable.electron_28;
-    })
     spotify-tui
     protonmail-bridge
     diff-so-fancy
