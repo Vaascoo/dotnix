@@ -3,7 +3,7 @@
   lib,
   ...
 }:
-pkgs.vimUtils.buildVimPluginFrom2Nix {
+pkgs.vimUtils.buildVimPlugin {
   name = "aquarium-nvim";
   src = pkgs.fetchFromGitHub {
     owner = "FrenzyExists";

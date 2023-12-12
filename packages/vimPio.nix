@@ -1,5 +1,5 @@
 {pkgs, ...}:
-pkgs.vimUtils.buildVimPluginFrom2Nix {
+pkgs.vimUtils.buildVimPlugin {
   name = "vim-pio";
   src = pkgs.fetchFromGitHub {
     owner = "normen";

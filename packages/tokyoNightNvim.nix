@@ -3,7 +3,7 @@
   lib,
   ...
 }:
-pkgs.vimUtils.buildVimPluginFrom2Nix {
+pkgs.vimUtils.buildVimPlugin {
   name = "tokyonight-nvim";
   src = pkgs.fetchFromGitHub {
     owner = "folke";

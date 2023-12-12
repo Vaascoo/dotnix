@@ -21,7 +21,7 @@
 in {
   environment.systemPackages = with pkgs;
     [
-      pinentry_gnome
+      pinentry-gnome
       pop-launcher
     ]
     ++ gnomeApps
