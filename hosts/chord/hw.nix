@@ -24,7 +24,7 @@
     config.boot.zfs.package.latestCompatibleLinuxPackages.amdgpu-pro
   ];
   boot.plymouth = {
-    enable = true;
+    enable = false; # TODO: Check if fixed
     themePackages = [(pkgs.adi1090x-plymouth-themes.override {selected_themes = ["splash"];})];
     theme = "splash";
   };
