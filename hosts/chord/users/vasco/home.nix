@@ -16,7 +16,7 @@
     spotify
     zoom-us
     calibre
-    unstable.thunderbird
+    thunderbird
     neofetch
     pavucontrol
     feh
