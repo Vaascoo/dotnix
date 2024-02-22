@@ -3,7 +3,7 @@
   lib,
   config,
   ...
-}:{ 
+}: {
   systemd.targets = {
     sleep.enable = false;
     suspend.enable = false;
