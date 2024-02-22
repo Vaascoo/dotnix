@@ -5,7 +5,7 @@
     settings = {
       main = {
         term = "xterm-256color";
-        font = "JetBrainsMono Nerd Font Mono:size=9";
+        font = "JetBrainsMono Nerd Font Mono:size=16";
       };
       csd.preferred = "none";
       colors.alpha = 0.90;
