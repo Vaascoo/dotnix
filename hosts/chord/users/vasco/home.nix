@@ -12,7 +12,7 @@
     evince
     unstable.webcord
     firefox
-    vlc
+    unstable.vlc
     spotify
     zoom-us
     calibre
