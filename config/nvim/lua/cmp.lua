@@ -212,7 +212,9 @@ require 'lspconfig'.tsserver.setup {}
 
 require('lspconfig')['pyright'].setup {}
 
-require('lspconfig')['nixd'].setup {}
+-- require('lspconfig')['nixd'].setup {}
+
+require('lspconfig')['nil_ls'].setup {}
 
 require('lspconfig')['gopls'].setup {}
 
