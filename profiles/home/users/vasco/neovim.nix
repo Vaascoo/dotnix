@@ -30,6 +30,8 @@ in {
     withPython3 = true;
     plugins = with pkgs.vimPlugins;
       [
+        copilot-cmp
+        copilot-lua
         plenary-nvim
         nvim-treesitter
         markdown-preview-nvim
@@ -40,6 +42,11 @@ in {
         cmp-git
         pkgs.latest.vimPlugins.nvim-lspconfig
         molokai
+        {
+          plugin = copilot-lua;
+          type = "lua";
+          config = builtins.readFile "${configDir}/nvim/lua/copilot.lua";
+        }
         {
           plugin = nvim-ts-rainbow2;
           type = "lua";

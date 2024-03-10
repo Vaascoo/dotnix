@@ -61,6 +61,7 @@ cmp.setup({
         buffer = "[Buffer]",
         emoji = "[Emoji]",
         omni = "[Omni]",
+        Copilot = "[Cp]",
       }),
     }),
 
@@ -113,11 +114,47 @@ cmp.setup({
   },
 
   sources = cmp.config.sources({
+    -- lsp
     { name = 'nvim_lsp' },
+    -- snippet engine
     { name = 'luasnip' }, -- For luasnip users.
-  }, {
+    -- current buffer
     { name = 'buffer' },
+    -- orgmode
     { name = 'orgmode' },
+    -- paths
+    { name = 'path' },
+    -- github copilot
+    {
+      name = "copilot",
+      -- keyword_length = 0,
+      max_item_count = 3,
+      trigger_characters = {
+        {
+          ".",
+          ":",
+          "(",
+          "'",
+          '"',
+          "[",
+          ",",
+          "#",
+          "*",
+          "@",
+          "|",
+          "=",
+          "-",
+          "{",
+          "/",
+          "\\",
+          "+",
+          "?",
+          " ",
+          -- "\t",
+          -- "\n",
+        },
+      },
+    },
   })
 })
 
@@ -182,10 +219,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end, opts)
   end,
 })
--- Setup lspconfig.
-local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
--- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
-
 require('lspconfig')['lua_ls'].setup {}
 
 
