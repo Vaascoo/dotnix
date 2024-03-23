@@ -23,7 +23,7 @@
     alacritty
     dogdns
     qalculate-gtk
-    joshuto
+    unstable.joshuto
     transmission-gtk
     transmission-remote-gtk
     git-ignore

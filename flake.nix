@@ -9,8 +9,7 @@
     impermanence.url = "github:nix-community/impermanence/master";
     flake-utils.url = "github:numtide/flake-utils";
     nixd = {
-      url = "github:nix-community/nixd/release/1.2";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/nixd/refs/tags/1.2.3";
     };
     home = {
       url = "github:nix-community/home-manager/release-23.11";
@@ -18,10 +17,6 @@
     };
     agenix = {
       url = "github:ryantm/agenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nixos-mailserver = {
-      url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     lanzaboote = {
@@ -35,13 +30,11 @@
     inherit (inputs.impermanence.nixosModules) impermanence;
     inherit (inputs.lanzaboote.nixosModules) lanzaboote;
     inherit (inputs.agenix.nixosModules) age;
-    inherit (inputs.nixos-mailserver.nixosModules) mailserver;
 
     _overlays = arch: [
       (final: prev: {
         unstable = mkPkgs inputs.unstable arch (arch: []);
         latest = mkPkgs inputs.latest arch (arch: []);
-        nixd = inputs.nixd.packages."${arch}".default;
       })
       (import ./overlays/default.nix {
         inherit lib;
@@ -115,7 +108,6 @@
             impermanence
             age
             lanzaboote
-            mailserver
           ]
           ++ (importRecursive dir)
           ++ _modules;

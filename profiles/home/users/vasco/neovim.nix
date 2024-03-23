@@ -197,7 +197,6 @@ in {
         clang-tools_15
         gopls
         java-language-server
-        nixd
         ansible-language-server
         terraform-lsp
       ]
