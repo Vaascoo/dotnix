@@ -94,12 +94,22 @@
     nixpkgs-fmt
     vagrant
     gnome.seahorse
+    virtiofsd
   ];
 
   networking.firewall.enable = false;
   programs.zsh.enable = true;
 
-  hardware.bluetooth.enable = true;
+  # hardware.bluetooth.enable = true;
+
+  hardware.bluetooth = {
+    enable = true;
+    settings = {
+      General = {
+        ControllerMode = "bredr";
+      };
+    };
+  };
 
   services.blueman.enable = true;
 
