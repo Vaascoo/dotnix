@@ -2,7 +2,7 @@
   description = "My NixOs hosts, Home-Manager configurations and some dev shells";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     latest.url = "github:NixOS/nixpkgs/master";
     nur.url = "github:nix-community/NUR";
@@ -12,7 +12,7 @@
       url = "github:nix-community/nixd/refs/tags/1.2.3";
     };
     home = {
-      url = "github:nix-community/home-manager/release-23.11";
+      url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     agenix = {

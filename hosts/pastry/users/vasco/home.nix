@@ -6,7 +6,6 @@
 }: let
   installedPackages = with pkgs; [
     unstable.obsidian
-    spotify-tui
     protonmail-bridge
     diff-so-fancy
     helvum

@@ -15,22 +15,23 @@
     sound-output-device-chooser
     blur-my-shell
     vitals
-    (pop-shell.overrideAttrs {
-      version = "unstable-2023-11-10";
-      src = pkgs.fetchFromGitHub {
-        owner = "pop-os";
-        repo = "shell";
-        rev = "aafc9458a47a68c396933c637de00421f5198a2a";
-        hash = "sha256-74lZbEYHj7fufRSbuI2SN9rqbB3gpRa0V96qjAFc01s=";
-      };
-      patches = [ ./gjs.patch ];
-    })
+    # (pop-shell.overrideAttrs {
+    #   version = "unstable-2023-11-10";
+    #   src = pkgs.fetchFromGitHub {
+    #     owner = "pop-os";
+    #     repo = "shell";
+    #     rev = "aafc9458a47a68c396933c637de00421f5198a2a";
+    #     hash = "sha256-74lZbEYHj7fufRSbuI2SN9rqbB3gpRa0V96qjAFc01s=";
+    #   };
+    #   patches = [ ./gjs.patch ];
+    # })
+    pop-shell
     dash-to-dock
   ];
 in {
   environment.systemPackages = with pkgs;
     [
-      pinentry-gnome
+      pinentry-gnome3
       pop-launcher
     ]
     ++ gnomeApps

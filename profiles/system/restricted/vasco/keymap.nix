@@ -9,5 +9,5 @@
     font = "Lat2-Terminus16";
     keyMap = "pt-latin1";
   };
-  services.xserver.layout = lib.mkIf config.services.xserver.enable "pt";
+  services.xserver.xkb.layout = lib.mkIf config.services.xserver.enable "pt";
 }

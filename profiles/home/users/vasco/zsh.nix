@@ -9,7 +9,7 @@
 
   programs.eza = {
     enable = true;
-    enableAliases = true;
+    enableZshIntegration = true;
   };
 
   programs.bat.enable = true;
@@ -32,7 +32,7 @@
   # programs.zsh.enable = true; For NixOS
   programs.zsh = {
     enable = true;
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
     enableCompletion = true;
     syntaxHighlighting.enable = true;
     autocd = true;
