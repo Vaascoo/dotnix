@@ -5,6 +5,7 @@
   ...
 }: let
   installedPackages = with pkgs; [
+    okular
     remmina
     protonmail-bridge
     diff-so-fancy
