@@ -5,27 +5,27 @@
   ...
 }: let
   installedPackages = with pkgs; [
-    unstable.obsidian
+    okular
+    remmina
     protonmail-bridge
     diff-so-fancy
     helvum
     evince
-    (webcord.override {
-      electron_24 = pkgs.unstable.electron_27;
-    })
+    unstable.webcord
+    armcord
     firefox
-    vlc
+    unstable.vlc
     spotify
     zoom-us
     calibre
-    unstable.thunderbird
+    thunderbird
     neofetch
     pavucontrol
     feh
     alacritty
     dogdns
     qalculate-gtk
-    joshuto
+    unstable.joshuto
     transmission-gtk
     transmission-remote-gtk
     git-ignore
