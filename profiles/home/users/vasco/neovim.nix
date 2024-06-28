@@ -1,5 +1,4 @@
 {
-  config,
   configDir,
   pkgs,
   ...
@@ -9,16 +8,13 @@
     vscode-langservers-extracted
     typescript-language-server
     bash-language-server
+    typescript
   ];
-  treeSitterGrammars = [];
 in {
   home.packages = with pkgs; [
-    nodePackages.typescript
     shellcheck
     ansible-lint
     typst
-    typst-lsp
-    typst-fmt
     go
   ];
   programs.neovim = {
@@ -42,73 +38,11 @@ in {
         cmp-git
         pkgs.latest.vimPlugins.nvim-lspconfig
         molokai
+        rainbow-delimiters-nvim
         {
           plugin = copilot-lua;
           type = "lua";
           config = builtins.readFile "${configDir}/nvim/lua/copilot.lua";
-        }
-        {
-          plugin = rainbow-delimiters-nvim;
-          type = "lua";
-          config = ''
-          '';
-        }
-        {
-          plugin = nvim-dap;
-          type = "lua";
-          config = ''
-            local dap = require('dap')
-            dap.adapters.python = function(cb, config)
-              if config.request == 'attach' then
-                ---@diagnostic disable-next-line: undefined-field
-                local port = (config.connect or config).port
-                ---@diagnostic disable-next-line: undefined-field
-                local host = (config.connect or config).host or '127.0.0.1'
-                cb({
-                  type = 'server',
-                  port = assert(port, '`connect.port` is required for a python `attach` configuration'),
-                  host = host,
-                  options = {
-                    source_filetype = 'python',
-                  },
-                })
-              else
-                cb({
-                  type = 'executable',
-                  command = 'path/to/virtualenvs/debugpy/bin/python',
-                  args = { '-m', 'debugpy.adapter' },
-                  options = {
-                    source_filetype = 'python',
-                  },
-                })
-              end
-            end
-            dap.configurations.python = {
-              {
-                -- The first three options are required by nvim-dap
-                type = 'python'; -- the type here established the link to the adapter definition: `dap.adapters.python`
-                request = 'launch';
-                name = "Launch file";
-
-                -- Options below are for debugpy, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for supported options
-
-                program = "''${file}"; -- This configuration will launch the current file if used.
-                pythonPath = function()
-                  -- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
-                  -- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
-                  -- You could adapt this - to for example use the `VIRTUAL_ENV` environment variable.
-                  local cwd = vim.fn.getcwd()
-                  if vim.fn.executable(cwd .. '/venv/bin/python') == 1 then
-                    return cwd .. '/venv/bin/python'
-                  elseif vim.fn.executable(cwd .. '/.venv/bin/python') == 1 then
-                    return cwd .. '/.venv/bin/python'
-                  else
-                    return nil
-                  end
-                end;
-              },
-            }
-          '';
         }
         {
           plugin = Navigator-nvim;
@@ -171,15 +105,11 @@ in {
           type = "lua";
           config = builtins.readFile "${configDir}/nvim/lua/lualine.lua";
         }
-      ]
-      ++ (with pkgs; [
-        vasco.vimPio
-      ]);
+      ];
 
     extraPackages = with pkgs;
       [
         pyright
-        # rnix-lsp
         nil
         sumneko-lua-language-server
         rust-analyzer
@@ -188,17 +118,14 @@ in {
         java-language-server
         ansible-language-server
         terraform-lsp
+        typst-lsp
+        typst-fmt
       ]
       ++ nodePkgs;
 
-    extraLuaPackages = ps:
-      with ps; [
-        lua-lsp
-      ];
+    extraLuaPackages = (ps: with ps; [ lua-lsp ]);
 
-    extraPython3Packages = ps:
-      with ps; [
-      ];
+    extraPython3Packages = (ps: with ps; []);
 
     extraConfig = builtins.readFile "${configDir}/nvim/init.vim";
   };
