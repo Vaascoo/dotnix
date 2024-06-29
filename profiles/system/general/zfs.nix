@@ -16,6 +16,7 @@
       "/etc/ssh"
       "/etc/secrets"
       "/etc/gitlab-runner"
+      "/etc/rancher/k3s"
     ];
   };
   environment.etc."machine-id".source = "/nix/persist/etc/machine-id";

@@ -10,6 +10,7 @@
         HTTP_PORT = 3000;
         ROOT_URL = "https://git.vaascoo.pt";
       };
+      packages.ENABLED = true;
       ui.THEMES = "auto,gitea,arc-green,github-auto,github,github-dark,catppuccin-mocha-blue";
     };
   };

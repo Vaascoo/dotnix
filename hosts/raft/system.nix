@@ -112,6 +112,15 @@
         forceSSL = true;
         useACMEHost = "vaascoo.pt";
         locations."/".proxyPass = "http://127.0.0.1:3000";
+        extraConfig = ''
+          client_max_body_size 1024M;
+        '';
+      };
+
+      "faas.vaascoo.pt" = {
+        forceSSL = true;
+        useACMEHost = "vaascoo.pt";
+        locations."/".proxyPass = "http://127.0.0.1:8080";
       };
     };
   };
@@ -137,6 +146,15 @@
 
   services.avahi.enable = true;
   services.flatpak.enable = true;
+
+  powerManagement.enable = false;
+
+  systemd.targets = {
+    sleep.enable = false;
+    suspend.enable = false;
+    hibernate.enable = false;
+    hybrid-sleep.enable = false;
+  };
 
   system.stateVersion = "22.05";
 }
