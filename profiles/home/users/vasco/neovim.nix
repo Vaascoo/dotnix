@@ -119,6 +119,7 @@ in {
         terraform-lsp
         typst-lsp
         typst-fmt
+        crystalline
       ]
       ++ nodePkgs;
 

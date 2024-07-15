@@ -83,6 +83,7 @@ in {
       firefox
       direnv
     ];
+
     home = {
       username = "vasco";
       homeDirectory = "/home/vasco";

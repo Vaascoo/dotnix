@@ -259,6 +259,8 @@ require('lspconfig')['ansiblels'].setup {}
 
 require('lspconfig')['terraform_lsp'].setup {}
 
+require('lspconfig')['crystalline'].setup {}
+
 require('lspconfig')['typst_lsp'].setup {
   settings = {
     exportPdf = "onSave",

@@ -317,5 +317,9 @@
     user = "jellyfin";
   };
 
+  programs.steam = {
+    enable = true;
+  };
+
   system.stateVersion = "22.05";
 }
