@@ -96,6 +96,7 @@
     nixpkgs-fmt
     vagrant
     gnome.seahorse
+    prismlauncher
   ];
 
   services.gitlab-runner = {

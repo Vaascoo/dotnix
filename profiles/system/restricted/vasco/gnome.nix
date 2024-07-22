@@ -1,9 +1,9 @@
 {pkgs, ...}: let
-  gnomeApps = with pkgs.unstable.gnome; [
+  gnomeApps = with pkgs.unstable; [
     gnome-system-monitor
     gnome-screenshot
     networkmanager-openvpn
-    gnome-shell-extensions
+    # gnome-shell-extensions
     gnome-tweaks
     dconf-editor
   ];

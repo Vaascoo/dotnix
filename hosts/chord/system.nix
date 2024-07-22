@@ -72,6 +72,7 @@
     (agenix.override {
       ageBin = "${pkgs.age}/bin/age";
     })
+    prismlauncher
     pciutils
     usbutils
     iw
@@ -126,6 +127,8 @@
 
   services.avahi.enable = true;
   services.flatpak.enable = true;
+
+  programs.steam.enable = true;
 
   system.stateVersion = "22.05";
 }
