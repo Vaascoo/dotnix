@@ -73,6 +73,7 @@
       ageBin = "${pkgs.age}/bin/age";
     })
     prismlauncher
+    sysstat
     pciutils
     usbutils
     iw
@@ -100,8 +101,6 @@
 
   networking.firewall.enable = false;
   programs.zsh.enable = true;
-
-  # hardware.bluetooth.enable = true;
 
   hardware.bluetooth = {
     enable = true;
