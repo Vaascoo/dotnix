@@ -10,15 +10,33 @@
     bash-language-server
     typescript
   ];
-in {
-  home.packages = with pkgs; [
-    shellcheck
-    ansible-lint
-    typst
-    go
-    gleam
-    erlang
+  lsps = with pkgs; [
+    pyright
+    nil
+    sumneko-lua-language-server
+    rust-analyzer
+    clang-tools_15
+    gopls
+    java-language-server
+    ansible-language-server
+    terraform-lsp
+    typst-lsp
+    typst-fmt
+    crystalline
   ];
+in {
+  home.packages = with pkgs;
+    [
+      shellcheck
+      ansible-lint
+      typst
+      go
+      gleam
+      erlang
+    ]
+    ++ lsps
+    ++ nodePkgs;
+
   programs.neovim = {
     enable = true;
     viAlias = true;
@@ -39,30 +57,19 @@ in {
       molokai
       rainbow-delimiters-nvim
       {
+        plugin = FTerm-nvim;
+        type = "lua";
+        config = builtins.readFile "${configDir}/nvim/lua/term.lua";
+      }
+      {
         plugin = Navigator-nvim;
         type = "lua";
         config = builtins.readFile "${configDir}/nvim/lua/navigator.lua";
       }
       {
-        plugin = gruvbox-nvim;
+        plugin = kanagawa-nvim;
         type = "lua";
-        config = ''
-          vim.o.brackground = "dark"
-          require("gruvbox").setup({
-            transparent_mode = true,
-          })
-          vim.cmd([[colorscheme gruvbox]])
-        '';
-      }
-      {
-        plugin = hop-nvim;
-        type = "lua";
-        config = builtins.readFile "${configDir}/nvim/lua/hop-nvim.lua";
-      }
-      {
-        plugin = orgmode;
-        type = "lua";
-        config = builtins.readFile "${configDir}/nvim/lua/orgmode.lua";
+        config = builtins.readFile "${configDir}/nvim/lua/kanagawa.lua";
       }
       {
         plugin = harpoon;
@@ -101,27 +108,8 @@ in {
       }
     ];
 
-    extraPackages = with pkgs;
-      [
-        pyright
-        nil
-        sumneko-lua-language-server
-        rust-analyzer
-        clang-tools_15
-        gopls
-        java-language-server
-        ansible-language-server
-        terraform-lsp
-        typst-lsp
-        typst-fmt
-        crystalline
-      ]
-      ++ nodePkgs;
-
     extraLuaPackages = ps: with ps; [lua-lsp];
 
-    extraPython3Packages = ps: with ps; [];
-
-    extraConfig = builtins.readFile "${configDir}/nvim/init.vim";
+    extraLuaConfig = builtins.readFile "${configDir}/nvim/init.lua";
   };
 }

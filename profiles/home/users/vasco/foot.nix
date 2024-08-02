@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{...}: {
   programs.foot = {
     enable = true;
     server.enable = true;
@@ -8,28 +8,30 @@
         font = "JetBrainsMono Nerd Font Mono:size=16";
       };
       csd.preferred = "none";
-      colors.alpha = 0.90;
+      colors.alpha = 1.00;
       cursor.color = "1A1826 D9E0EE";
 
       colors = {
-        foreground = "D9E0EE";
-        background = "1E1D2F";
-        regular0 = "6E6C7E";
-        regular1 = "F28FAD";
-        regular2 = "ABE9B3";
-        regular3 = "FAE3B0";
-        regular4 = "96CDFB";
-        regular5 = "F5C2E7";
-        regular6 = "89DCEB";
-        regular7 = "D9E0EE";
-        bright0 = "988BA2";
-        bright1 = "F28FAD";
-        bright2 = "ABE9B3";
-        bright3 = "FAE3B0";
-        bright4 = "96CDFB";
-        bright5 = "F5C2E7";
-        bright6 = "89DCEB";
-        bright7 = "D9E0EE";
+        foreground = "dcd7ba";
+        background = "1f1f28";
+        selection-foreground = "c8c093";
+        selection-background = "2d4f67";
+        regular0 = "090618";
+        regular1 = "c34043";
+        regular2 = "76946a";
+        regular3 = "c0a36e";
+        regular4 = "7e9cd8";
+        regular5 = "957fb8";
+        regular6 = "6a9589";
+        regular7 = "c8c093";
+        bright0 = "727169";
+        bright1 = "e82424";
+        bright2 = "98bb6c";
+        bright3 = "e6c384";
+        bright4 = "7fb4ca";
+        bright5 = "938aa9";
+        bright6 = "7aa89f";
+        bright7 = "dcd7ba";
       };
     };
   };

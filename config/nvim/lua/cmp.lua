@@ -1,5 +1,3 @@
-local nvim_lsp = require('lspconfig')
-local luasnip = require('luasnip')
 local lspkind = require('lspkind')
 local cmp = require('cmp')
 local function has_words_before()
@@ -7,64 +5,23 @@ local function has_words_before()
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
-local cmp_kinds = {
-  Class         = " ",
-  Color         = " ",
-  Constant      = " ",
-  Constructor   = " ",
-  Enum          = " ",
-  EnumMember    = " ",
-  Event         = "a ",
-  Field         = "ﰠ ",
-  File          = " ",
-  Folder        = " ",
-  Function      = " ",
-  Interface     = " ",
-  Keyword       = " ",
-  Method        = " ",
-  Module        = " ",
-  Operator      = " ",
-  Property      = " ",
-  Reference     = " ",
-  Snippet       = " ",
-  Struct        = "פּ ",
-  Text          = " ",
-  TypeParameter = " ",
-  Unit          = " ",
-  Value         = " ",
-  Variable      = " ",
-}
-
 cmp.setup({
-  snippet = {
-    -- REQUIRED - you must specify a snippet engine
-    expand = function(args)
-      if not luasnip then
-        return
-      end
-      luasnip.lsp_expand(args.body)
-    end,
+
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
   },
 
   formatting = {
-    -- format = function(_, vim_item)
-    --   vim_item.kind = (cmp_kinds[vim_item.kind] or "") .. vim_item.kind
-    --   return vim_item
-    -- end,
-    format = lspkind.cmp_format({
-      mode = "symbol_text",
-      menu = ({
-        nvim_lsp = "[LSP]",
-        ultisnips = "[US]",
-        nvim_lua = "[Lua]",
-        path = "[Path]",
-        buffer = "[Buffer]",
-        emoji = "[Emoji]",
-        omni = "[Omni]",
-        Copilot = "[Cp]",
-      }),
-    }),
 
+    format = lspkind.cmp_format({
+      mode = 'symbol_text', -- show only symbol annotations
+      maxwidth = 50,   -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+      -- can also be a function to dynamically calculate max width such as
+      -- maxwidth = function() return math.floor(0.45 * vim.o.columns) end,
+      ellipsis_char = '...',    -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+      show_labelDetails = true, -- show labelDetails in menu. Disabled by default
+    })
   },
 
   mapping = {
@@ -86,10 +43,6 @@ cmp.setup({
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      elseif luasnip.expandable() then
-        luasnip.expand()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
       elseif has_words_before() then
         cmp.complete()
       else
@@ -102,8 +55,6 @@ cmp.setup({
     ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
       else
         fallback()
       end
@@ -116,8 +67,6 @@ cmp.setup({
   sources = cmp.config.sources({
     -- lsp
     { name = 'nvim_lsp' },
-    -- snippet engine
-    { name = 'luasnip' }, -- For luasnip users.
     -- current buffer
     { name = 'buffer' },
     -- orgmode
@@ -153,21 +102,16 @@ cmp.setup.cmdline(':', {
 })
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
+vim.keymap.set('n', '<Leader>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
+vim.keymap.set('n', '<Leader>q', vim.diagnostic.setloclist)
 
--- Use LspAttach autocommand to only map the following keys
--- after the language server attaches to the current buffer
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
   callback = function(ev)
-    -- Enable completion triggered by <c-x><c-o>
     vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-    -- Buffer local mappings.
-    -- See `:help vim.lsp.*` for documentation on any of the below functions
     local opts = { buffer = ev.buf }
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
@@ -188,8 +132,30 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end, opts)
   end,
 })
-require('lspconfig')['lua_ls'].setup {}
 
+require('lspconfig')['lua_ls'].setup {
+  on_init = function(client)
+    local path = client.workspace_folders[1].name
+    if vim.loop.fs_stat(path .. '/.luarc.json') or vim.loop.fs_stat(path .. '/.luarc.jsonc') then
+      return
+    end
+
+    client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+      runtime = {
+        version = 'LuaJIT'
+      },
+      workspace = {
+        checkThirdParty = false,
+        library = {
+          vim.env.VIMRUNTIME
+        }
+      }
+    })
+  end,
+  settings = {
+    Lua = {}
+  }
+}
 
 require('lspconfig')['eslint'].setup {
   filetypes = {
@@ -214,7 +180,7 @@ require 'lspconfig'.tsserver.setup {}
 
 require('lspconfig')['pyright'].setup {}
 
-require'lspconfig'['julials'].setup{}
+require 'lspconfig'['julials'].setup {}
 
 require('lspconfig')['nil_ls'].setup {}
 
