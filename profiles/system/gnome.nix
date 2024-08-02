@@ -3,7 +3,6 @@
     gnome-system-monitor
     gnome-screenshot
     networkmanager-openvpn
-    # gnome-shell-extensions
     gnome-tweaks
     dconf-editor
   ];
@@ -15,16 +14,6 @@
     sound-output-device-chooser
     blur-my-shell
     vitals
-    # (pop-shell.overrideAttrs {
-    #   version = "unstable-2023-11-10";
-    #   src = pkgs.fetchFromGitHub {
-    #     owner = "pop-os";
-    #     repo = "shell";
-    #     rev = "aafc9458a47a68c396933c637de00421f5198a2a";
-    #     hash = "sha256-74lZbEYHj7fufRSbuI2SN9rqbB3gpRa0V96qjAFc01s=";
-    #   };
-    #   patches = [ ./gjs.patch ];
-    # })
     pop-shell
     dash-to-dock
   ];
@@ -37,6 +26,9 @@ in {
     ++ gnomeApps
     ++ extensions;
 
+  programs.dconf.enable = true;
+  services.dbus.enable = true;
+  services.libinput.enable = true;
   services.power-profiles-daemon.enable = true;
   services.xserver.enable = true;
   services.xserver.desktopManager.gnome.enable = true;

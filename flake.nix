@@ -64,12 +64,6 @@
         (builtins.filter (entry: lib.hasSuffix ".nix" entry) entries)
       else [];
 
-    importAll = path: {}; # import all .nix files in path
-    importIfExists = path:
-      if (builtins.pathExists path)
-      then [(import "${path}")]
-      else [];
-
     mkProfiles = dir: let
       mkLevel = entry: type:
         if (lib.hasSuffix ".nix" entry && type == "regular")

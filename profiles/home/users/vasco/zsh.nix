@@ -29,7 +29,6 @@
     };
   };
 
-  # programs.zsh.enable = true; For NixOS
   programs.zsh = {
     enable = true;
     autosuggestion.enable = true;

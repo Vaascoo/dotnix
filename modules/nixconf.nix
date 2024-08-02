@@ -22,6 +22,7 @@
     settings.experimental-features = ["nix-command" "flakes"];
   };
 
+  environment.sessionVariables.NIXPKGS_ALLOW_UNFREE = lib.mkForce "1";
   environment.etc."channels/nixpkgs".source = inputs.unstable.outPath;
   environment.etc."channels/nixpkgs2405".source = inputs.nixpkgs.outPath;
   environment.etc."channels/home-manager".source = inputs.home.outPath;
