@@ -124,37 +124,6 @@ cmp.setup({
     { name = 'orgmode' },
     -- paths
     { name = 'path' },
-    -- github copilot
-    {
-      name = "copilot",
-      -- keyword_length = 0,
-      max_item_count = 3,
-      trigger_characters = {
-        {
-          ".",
-          ":",
-          "(",
-          "'",
-          '"',
-          "[",
-          ",",
-          "#",
-          "*",
-          "@",
-          "|",
-          "=",
-          "-",
-          "{",
-          "/",
-          "\\",
-          "+",
-          "?",
-          " ",
-          -- "\t",
-          -- "\n",
-        },
-      },
-    },
   })
 })
 
@@ -260,6 +229,8 @@ require('lspconfig')['ansiblels'].setup {}
 require('lspconfig')['terraform_lsp'].setup {}
 
 require('lspconfig')['crystalline'].setup {}
+
+require('lspconfig')['gleam'].setup {}
 
 require('lspconfig')['typst_lsp'].setup {
   settings = {

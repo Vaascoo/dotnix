@@ -16,6 +16,8 @@ in {
     ansible-lint
     typst
     go
+    gleam
+    erlang
   ];
   programs.neovim = {
     enable = true;
@@ -25,8 +27,6 @@ in {
     withNodeJs = true;
     withPython3 = true;
     plugins = with pkgs.vimPlugins; [
-      copilot-cmp
-      copilot-lua
       plenary-nvim
       nvim-treesitter
       markdown-preview-nvim
@@ -38,11 +38,6 @@ in {
       pkgs.latest.vimPlugins.nvim-lspconfig
       molokai
       rainbow-delimiters-nvim
-      {
-        plugin = copilot-lua;
-        type = "lua";
-        config = builtins.readFile "${configDir}/nvim/lua/copilot.lua";
-      }
       {
         plugin = Navigator-nvim;
         type = "lua";
