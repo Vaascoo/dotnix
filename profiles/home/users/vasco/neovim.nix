@@ -56,6 +56,7 @@ in {
       pkgs.latest.vimPlugins.nvim-lspconfig
       molokai
       rainbow-delimiters-nvim
+      luasnip
       {
         plugin = FTerm-nvim;
         type = "lua";

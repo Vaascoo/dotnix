@@ -5,7 +5,17 @@ local function has_words_before()
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+capabilities.textDocument.completion.completionItem.snippetSupport = false
+
 cmp.setup({
+
+  snippet = {
+    expand = function(args)
+      require('luasnip').lsp_expand(args.body)
+    end,
+  },
 
   window = {
     completion = cmp.config.window.bordered(),
@@ -16,7 +26,7 @@ cmp.setup({
 
     format = lspkind.cmp_format({
       mode = 'symbol_text', -- show only symbol annotations
-      maxwidth = 50,   -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+      maxwidth = 50,        -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
       -- can also be a function to dynamically calculate max width such as
       -- maxwidth = function() return math.floor(0.45 * vim.o.columns) end,
       ellipsis_char = '...',    -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
@@ -67,6 +77,8 @@ cmp.setup({
   sources = cmp.config.sources({
     -- lsp
     { name = 'nvim_lsp' },
+    -- snippets
+    { name = 'luasnip' },
     -- current buffer
     { name = 'buffer' },
     -- orgmode
@@ -154,7 +166,8 @@ require('lspconfig')['lua_ls'].setup {
   end,
   settings = {
     Lua = {}
-  }
+  },
+  capabilities = capabilities
 }
 
 require('lspconfig')['eslint'].setup {
@@ -167,36 +180,65 @@ require('lspconfig')['eslint'].setup {
     "jsx",
     "html"
   },
+  capabilities = capabilities
 }
-require('lspconfig')['clangd'].setup {}
+require('lspconfig')['clangd'].setup {
+  capabilities = capabilities
+}
 
 require('lspconfig')['java_language_server'].setup {
-  cmd = { 'java-language-server' }
+  cmd = { 'java-language-server' },
+  capabilities = capabilities
 }
 
-require 'lspconfig'.kotlin_language_server.setup {}
+require 'lspconfig'.kotlin_language_server.setup {
+  capabilities = capabilities
+}
 
-require 'lspconfig'.tsserver.setup {}
+require 'lspconfig'.tsserver.setup {
+  capabilities = capabilities
+}
 
-require('lspconfig')['pyright'].setup {}
+require('lspconfig')['pyright'].setup {
+  capabilities = capabilities
+}
 
-require 'lspconfig'['julials'].setup {}
+require 'lspconfig'['julials'].setup {
+  capabilities = capabilities
+}
 
-require('lspconfig')['nil_ls'].setup {}
 
-require('lspconfig')['gopls'].setup {}
+require('lspconfig')['nil_ls'].setup {
+  capabilities = capabilities
+}
 
-require('lspconfig')['rust_analyzer'].setup {}
+require('lspconfig')['gopls'].setup {
+  capabilities = capabilities
+}
 
-require('lspconfig')['bashls'].setup {}
+require('lspconfig')['rust_analyzer'].setup {
+  capabilities = capabilities
+}
 
-require('lspconfig')['ansiblels'].setup {}
+require('lspconfig')['bashls'].setup {
+  capabilities = capabilities
+}
 
-require('lspconfig')['terraform_lsp'].setup {}
+require('lspconfig')['ansiblels'].setup {
+  capabilities = capabilities
+}
 
-require('lspconfig')['crystalline'].setup {}
+require('lspconfig')['terraform_lsp'].setup {
+  capabilities = capabilities
+}
 
-require('lspconfig')['gleam'].setup {}
+require('lspconfig')['crystalline'].setup {
+  capabilities = capabilities
+}
+
+require('lspconfig')['gleam'].setup {
+  capabilities = capabilities
+}
 
 require('lspconfig')['typst_lsp'].setup {
   settings = {
@@ -206,4 +248,5 @@ require('lspconfig')['typst_lsp'].setup {
     "typst",
     "typ"
   },
+  capabilities = capabilities
 }
