@@ -51,7 +51,7 @@
     vasco = {
       isNormalUser = true;
       description = "Vasco Correia"; # full name in gdm
-      extraGroups = ["audio" "docker" "video" "wheel" "networkmanager" "libvirtd" "dialout"]; # Enable ‘sudo’ for the user.
+      extraGroups = ["audio" "docker" "video" "wheel" "networkmanager" "libvirtd" "dialout" "fuse"]; # Enable ‘sudo’ for the user.
       initialHashedPassword = "$6$DzeNGzM3T9/NALiy$iHZ.pTMGbqhdMzcpwTuZ8dM6zGGoH.7M/m5GBAK5v3tdg2rpYcnSq8k3VlEwsvbOjv/fcK2BR7E8yt69nE9BR/";
       shell = pkgs.zsh;
     };
