@@ -5,7 +5,6 @@
 }: let
   installedPackages = with pkgs; [
     alacritty
-    armcord
     brave
     calibre
     cmake
