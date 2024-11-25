@@ -16,7 +16,6 @@
     hwAccel
     keymap
     media
-    minio
     pipewire
     ssh
     sshKeys

@@ -1,4 +1,4 @@
-{config, ...}: {
+{pkgs, ...}: {
   #TODO this will be moved from here
   services.nginx = {
     enable = true;
@@ -10,31 +10,6 @@
         locations."/".proxyPass = "http://127.0.0.1:3000";
         extraConfig = ''
           client_max_body_size 1024M;
-        '';
-      };
-
-      "faas.vaascoo.pt" = {
-        forceSSL = true;
-        useACMEHost = "vaascoo.pt";
-        locations."/".proxyPass = "http://127.0.0.1:8080";
-        extraConfig = ''
-        '';
-      };
-
-      "s3.vaascoo.pt" = {
-        forceSSL = true;
-        useACMEHost = "vaascoo.pt";
-        locations."/".proxyPass = "http://127.0.0.1:9000";
-        extraConfig = ''
-          client_max_body_size 1024M;
-        '';
-      };
-
-      "minio.vaascoo.pt" = {
-        forceSSL = true;
-        useACMEHost = "vaascoo.pt";
-        locations."/".proxyPass = "http://127.0.0.1:9001";
-        extraConfig = ''
         '';
       };
 
