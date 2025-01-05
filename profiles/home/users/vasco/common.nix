@@ -12,7 +12,6 @@
     dogdns
     evince
     feh
-    firefox
     gcc
     git-ignore
     gnumake

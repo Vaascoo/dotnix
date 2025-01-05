@@ -12,7 +12,6 @@
     helvum
     evince
     unstable.webcord
-    firefox
     unstable.vlc
     spotify
     zoom-us
@@ -25,8 +24,7 @@
     dogdns
     qalculate-gtk
     unstable.joshuto
-    transmission-gtk
-    transmission-remote-gtk
+    transmission_4-gtk
     git-ignore
     jellyfin-media-player
     sonixd

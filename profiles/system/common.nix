@@ -7,9 +7,10 @@
     dnsutils
     docker-compose
     file
-    gnome.seahorse
+    seahorse
     inetutils
     iproute2
+    inotify-tools
     iw
     lsof
     nixpkgs-fmt
@@ -23,7 +24,6 @@
     unzip
     unzip
     usbutils
-    vagrant
     virtiofsd
     virt-manager
     wget

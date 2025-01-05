@@ -4,7 +4,6 @@
 {
   config,
   lib,
-  pkgs,
   modulesPath,
   ...
 }: {
@@ -20,14 +19,6 @@
   boot.kernelParams = [
     "quiet"
   ];
-  boot.extraModulePackages = [
-    config.boot.zfs.package.latestCompatibleLinuxPackages.amdgpu-pro
-  ];
-  boot.plymouth = {
-    enable = false; # TODO: Check if fixed
-    themePackages = [(pkgs.adi1090x-plymouth-themes.override {selected_themes = ["splash"];})];
-    theme = "splash";
-  };
   boot.supportedFilesystems = ["zfs"];
   boot.zfs.allowHibernation = true;
   boot.zfs.forceImportRoot = false;

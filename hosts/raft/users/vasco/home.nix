@@ -12,7 +12,6 @@
     helvum
     evince
     unstable.webcord
-    firefox
     unstable.vlc
     spotify
     zoom-us
