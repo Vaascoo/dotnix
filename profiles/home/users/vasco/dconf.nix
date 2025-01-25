@@ -113,8 +113,8 @@ with lib.hm.gvariant; {
     "org/gnome/desktop/background" = {
       color-shading-type = "solid";
       picture-options = "zoom";
-      picture-uri = "file:///home/vasco/.config/nix/config/wallpapers/fuji.jpg";
-      picture-uri-dark = "file:///home/vasco/.config/nix/config/wallpapers/fuji.jpg";
+      picture-uri = "file:///home/vasco/.config/nix/config/wallpapers/newyork.jpg";
+      picture-uri-dark = "file:///home/vasco/.config/nix/config/wallpapers/newyork.jpg";
       primary-color = "#000000000000";
       secondary-color = "#000000000000";
     };

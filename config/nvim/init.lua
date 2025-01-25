@@ -15,7 +15,7 @@ vim.opt.termguicolors = true
 vim.opt.showtabline = 1
 
 vim.g.completeopt = { "menu", "menuon", "noselect" }
-vim.g.mapleader = ","
+vim.g.mapleader = " "
 vim.g.background = "dark"
 
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
