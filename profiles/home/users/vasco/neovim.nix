@@ -54,7 +54,6 @@ in {
       cmp-treesitter
       cmp-git
       pkgs.latest.vimPlugins.nvim-lspconfig
-      molokai
       rainbow-delimiters-nvim
       luasnip
       {
@@ -106,6 +105,11 @@ in {
         plugin = lualine-nvim;
         type = "lua";
         config = builtins.readFile "${configDir}/nvim/lua/lualine.lua";
+      }
+      {
+        plugin = rose-pine;
+        type = "lua";
+        config = builtins.readFile "${configDir}/nvim/lua/colors.lua";
       }
     ];
 

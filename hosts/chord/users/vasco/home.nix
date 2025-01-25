@@ -5,6 +5,7 @@
   ...
 }: let
   installedPackages = with pkgs; [
+    ghostty
     okular
     remmina
     protonmail-bridge
@@ -39,12 +40,6 @@
     winetricks
     waypipe
     wl-clipboard
-    # for emacs
-    libvterm
-    libtool
-    cmake
-    gnumake
-    gcc
   ];
 in {
   home-manager = {
@@ -65,7 +60,6 @@ in {
       streaming
       ssh
       fzf
-      foot
       kitty
       gtk
       zsh

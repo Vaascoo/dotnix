@@ -448,8 +448,8 @@ with lib.hm.gvariant; {
 
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
       binding = "<Super>Return";
-      command = "footclient \"tmux\"";
-      name = "foot";
+      command = "ghostty -e \"tmux\"";
+      name = "terminal";
     };
 
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
