@@ -69,6 +69,7 @@ in {
       firefox
       direnv
     ];
+
     home = {
       username = "vasco";
       homeDirectory = "/home/vasco";
@@ -82,10 +83,16 @@ in {
     };
 
     programs.home-manager.enable = true;
+
     home.packages = installedPackages;
     home.file.".ideavimrc" = {
       enable = true;
       text = builtins.readFile "${configDir}/nvim/init.vim";
+    };
+
+    home.file.".config/ghostty/config" = {
+      enable = true;
+      text = builtins.readFile "${configDir}/ghostty/config";
     };
   };
 }
