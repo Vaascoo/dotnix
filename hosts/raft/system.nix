@@ -14,6 +14,7 @@
     gitea
     gnome
     hwAccel
+    k3s
     keymap
     media
     pipewire
