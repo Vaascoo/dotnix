@@ -1,4 +1,5 @@
 {
+  config,
   configDir,
   pkgs,
   profiles,
