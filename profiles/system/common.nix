@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, lib, ...}: {
   environment.systemPackages = with pkgs; [
     (agenix.override {
       ageBin = "${pkgs.age}/bin/age";
@@ -38,6 +38,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.networkmanager.enable = true;
+  systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
 
   time.timeZone = "Europe/Lisbon";
   i18n.defaultLocale = "en_US.UTF-8";

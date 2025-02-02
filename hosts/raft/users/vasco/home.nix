@@ -46,6 +46,7 @@
     cmake
     gnumake
     gcc
+    ghostty
   ];
 in {
   services.emacs = {
@@ -74,6 +75,7 @@ in {
       foot
       kitty
       gtk
+      ghostty
       zsh
       neovim
       git
@@ -96,9 +98,5 @@ in {
 
     programs.home-manager.enable = true;
     home.packages = installedPackages;
-    home.file.".ideavimrc" = {
-      enable = true;
-      text = builtins.readFile "${configDir}/nvim/init.vim";
-    };
   };
 }
