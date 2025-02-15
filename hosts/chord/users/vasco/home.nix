@@ -68,6 +68,7 @@ in {
       tmux
       firefox
       direnv
+      ghostty
     ];
 
     home = {

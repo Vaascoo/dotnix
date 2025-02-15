@@ -1,4 +1,8 @@
-{pkgs, lib, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   environment.systemPackages = with pkgs; [
     (agenix.override {
       ageBin = "${pkgs.age}/bin/age";
