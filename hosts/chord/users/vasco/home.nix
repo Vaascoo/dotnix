@@ -59,6 +59,7 @@ in {
       dconf
       streaming
       ssh
+      foot
       fzf
       kitty
       gtk
