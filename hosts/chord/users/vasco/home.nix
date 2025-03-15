@@ -57,6 +57,7 @@ in {
   }: {
     imports = with profiles.home.users.vasco; [
       dconf
+      vscode
       streaming
       ssh
       foot
