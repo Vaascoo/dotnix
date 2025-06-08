@@ -12,7 +12,6 @@
         extraConfig = ''
           set -g @tilish-dmenu 'on'
           set -g @tilish-navigator 'on'
-          set -g @tilish-shiftnum '!"#$%&/()='
           bind -n "M-f" resize-pane -Z
         '';
       }

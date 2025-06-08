@@ -1,27 +1,25 @@
 {pkgs, ...}: let
-  gnomeApps = with pkgs.unstable; [
+  gnomeApps = with pkgs; [
     gnome-system-monitor
     gnome-screenshot
     networkmanager-openvpn
     gnome-tweaks
     dconf-editor
+    albert
   ];
 
-  extensions = with pkgs.unstable.gnomeExtensions; [
+  extensions = with pkgs.gnomeExtensions; [
     tray-icons-reloaded
     appindicator
     tiling-assistant
-    sound-output-device-chooser
-    blur-my-shell
     vitals
-    pop-shell
     dash-to-dock
+    tiling-shell
   ];
 in {
   environment.systemPackages = with pkgs;
     [
       pinentry-gnome3
-      pop-launcher
     ]
     ++ gnomeApps
     ++ extensions;

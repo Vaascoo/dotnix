@@ -5,14 +5,15 @@
   ...
 }: let
   installedPackages = with pkgs; [
+    alejandra
     ghostty
-    okular
     remmina
     protonmail-bridge
     diff-so-fancy
+    gh
     helvum
     evince
-    unstable.webcord
+    discord
     unstable.vlc
     spotify
     zoom-us
@@ -28,6 +29,7 @@
     transmission_4-gtk
     git-ignore
     jellyfin-media-player
+    lazygit
     sonixd
     slack
     tldr
@@ -63,6 +65,7 @@ in {
       foot
       fzf
       kitty
+      gc
       gtk
       zsh
       neovim
@@ -79,12 +82,13 @@ in {
       stateVersion = "22.05";
     };
 
-    systemd.user.services.protonmail-bridge = {
-      Unit.Description = "Proton Mail Bridge server";
-      Install.WantedBy = ["graphical-session.target"];
-      Service.ExecStart = "${pkgs.protonmail-bridge}/bin/protonmail-bridge -n";
+    systemd.user.services = {
+      protonmail-bridge = {
+        Unit.Description = "Proton Mail Bridge server";
+        Install.WantedBy = ["graphical-session.target"];
+        Service.ExecStart = "${pkgs.unstable.protonmail-bridge}/bin/protonmail-bridge -n";
+      };
     };
-
     programs.home-manager.enable = true;
 
     home.packages = installedPackages;

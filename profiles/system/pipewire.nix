@@ -1,5 +1,5 @@
 {lib, ...}: {
-  hardware.pulseaudio.enable = lib.mkDefault false;
+  services.pulseaudio.enable = lib.mkDefault false;
   services.pipewire = {
     enable = true;
     alsa.enable = true;

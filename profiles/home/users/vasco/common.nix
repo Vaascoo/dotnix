@@ -23,7 +23,7 @@
     libvterm
     lutris
     neofetch
-    okular
+    kdePackages.okular
     pavucontrol
     protonmail-bridge
     qalculate-gtk

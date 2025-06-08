@@ -8,7 +8,9 @@
     age
     common
     doh
+    fingerprint
     fonts
+    gc
     gnome
     hwAccel
     keymap
@@ -17,7 +19,6 @@
     tailscale
     virt
     wayland
-    wireguard
     zfs
   ];
 

@@ -207,7 +207,20 @@ require 'lspconfig'['julials'].setup {
 
 
 require('lspconfig')['nil_ls'].setup {
-  capabilities = capabilities
+  capabilities = capabilities,
+  settings = {
+    ['nil'] = {
+      formatting = {
+        command = { "alejandra", "--quiet" },
+      },
+      nix = {
+        maxMemoryMB = 4096,
+        flake = {
+          autoEvalInputs = true,
+        },
+      },
+    },
+  }
 }
 
 require('lspconfig')['gopls'].setup {

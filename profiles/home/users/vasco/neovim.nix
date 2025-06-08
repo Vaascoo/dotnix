@@ -20,9 +20,27 @@
     java-language-server
     ansible-language-server
     terraform-lsp
-    typst-lsp
+    tinymist
     typst-fmt
     crystalline
+  ];
+
+  cmpPlugins = with pkgs.vimPlugins; [
+    lspkind-nvim
+    cmp-nvim-lsp
+    cmp-treesitter
+    cmp-buffer
+    cmp-path
+    cmp-cmdline
+    cmp-git
+    nvim-lspconfig
+    nvim-treesitter
+  ];
+
+  vibePlugins = with pkgs.vimPlugins; [
+    dressing-nvim
+    nui-nvim
+    render-markdown-nvim
   ];
 in {
   home.packages = with pkgs;
@@ -44,74 +62,79 @@ in {
     vimdiffAlias = true;
     withNodeJs = true;
     withPython3 = true;
-    plugins = with pkgs.vimPlugins; [
-      plenary-nvim
-      nvim-treesitter
-      markdown-preview-nvim
-      vim-nix
-      lspkind-nvim
-      cmp-nvim-lsp
-      cmp-treesitter
-      cmp-git
-      pkgs.latest.vimPlugins.nvim-lspconfig
-      rainbow-delimiters-nvim
-      luasnip
-      {
-        plugin = FTerm-nvim;
-        type = "lua";
-        config = builtins.readFile "${configDir}/nvim/lua/term.lua";
-      }
-      {
-        plugin = Navigator-nvim;
-        type = "lua";
-        config = builtins.readFile "${configDir}/nvim/lua/navigator.lua";
-      }
-      {
-        plugin = kanagawa-nvim;
-        type = "lua";
-        config = builtins.readFile "${configDir}/nvim/lua/kanagawa.lua";
-      }
-      {
-        plugin = harpoon;
-        type = "lua";
-        config = builtins.readFile "${configDir}/nvim/lua/harpoon.lua";
-      }
-      {
-        plugin = telescope-nvim;
-        type = "lua";
-        config = builtins.readFile "${configDir}/nvim/lua/telescope.lua";
-      }
-      {
-        plugin = luasnip;
-        type = "lua";
-        config = builtins.readFile "${configDir}/nvim/lua/luasnip.lua";
-      }
-      {
-        plugin = nvim-surround;
-        type = "lua";
-        config = builtins.readFile "${configDir}/nvim/lua/surround.lua";
-      }
-      {
-        plugin = nvim-cmp;
-        type = "lua";
-        config = builtins.readFile "${configDir}/nvim/lua/cmp.lua";
-      }
-      {
-        plugin = nvim-treesitter.withAllGrammars;
-        type = "lua";
-        config = builtins.readFile "${configDir}/nvim/lua/treesitter.lua";
-      }
-      {
-        plugin = lualine-nvim;
-        type = "lua";
-        config = builtins.readFile "${configDir}/nvim/lua/lualine.lua";
-      }
-      {
-        plugin = rose-pine;
-        type = "lua";
-        config = builtins.readFile "${configDir}/nvim/lua/colors.lua";
-      }
-    ];
+    plugins = with pkgs.vimPlugins;
+      [
+        nvim-lint
+        nvim-web-devicons
+        plenary-nvim
+        markdown-preview-nvim
+        vim-nix
+        rainbow-delimiters-nvim
+        luasnip
+        {
+          plugin = mini-icons;
+          type = "lua";
+          config = ''
+            require("mini.icons").setup()
+          '';
+        }
+        {
+          plugin = FTerm-nvim;
+          type = "lua";
+          config = builtins.readFile "${configDir}/nvim/lua/term.lua";
+        }
+        {
+          plugin = Navigator-nvim;
+          type = "lua";
+          config = builtins.readFile "${configDir}/nvim/lua/navigator.lua";
+        }
+        {
+          plugin = kanagawa-nvim;
+          type = "lua";
+          config = builtins.readFile "${configDir}/nvim/lua/kanagawa.lua";
+        }
+        {
+          plugin = harpoon;
+          type = "lua";
+          config = builtins.readFile "${configDir}/nvim/lua/harpoon.lua";
+        }
+        {
+          plugin = telescope-nvim;
+          type = "lua";
+          config = builtins.readFile "${configDir}/nvim/lua/telescope.lua";
+        }
+        {
+          plugin = luasnip;
+          type = "lua";
+          config = builtins.readFile "${configDir}/nvim/lua/luasnip.lua";
+        }
+        {
+          plugin = nvim-surround;
+          type = "lua";
+          config = builtins.readFile "${configDir}/nvim/lua/surround.lua";
+        }
+        {
+          plugin = nvim-cmp;
+          type = "lua";
+          config = builtins.readFile "${configDir}/nvim/lua/cmp.lua";
+        }
+        {
+          plugin = nvim-treesitter.withAllGrammars;
+          type = "lua";
+          config = builtins.readFile "${configDir}/nvim/lua/treesitter.lua";
+        }
+        {
+          plugin = lualine-nvim;
+          type = "lua";
+          config = builtins.readFile "${configDir}/nvim/lua/lualine.lua";
+        }
+        {
+          plugin = rose-pine;
+          type = "lua";
+          config = builtins.readFile "${configDir}/nvim/lua/colors.lua";
+        }
+      ]
+      ++ cmpPlugins ++ vibePlugins;
 
     extraLuaPackages = ps: with ps; [lua-lsp];
 

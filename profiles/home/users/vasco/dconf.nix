@@ -37,15 +37,22 @@ with lib.hm.gvariant; {
     };
 
     "org/gnome/Console" = {
+      custom-font = "JetBrainsMonoNL Nerd Font Mono 10";
       font-scale = 1.8;
       last-window-maximised = false;
       last-window-size = mkTuple [1920 1168];
       theme = "night";
+      use-system-font = false;
     };
 
     "org/gnome/Extensions" = {
-      window-height = 1168;
-      window-width = 1920;
+      window-height = 937;
+      window-maximized = false;
+      window-width = 877;
+    };
+
+    "org/gnome/GWeather4" = {
+      temperature-unit = "centigrade";
     };
 
     "org/gnome/Geary" = {
@@ -65,6 +72,23 @@ with lib.hm.gvariant; {
     "org/gnome/Totem" = {
       active-plugins = ["recent" "autoload-subtitles" "mpris" "screensaver" "open-directory" "rotation" "screenshot" "save-file" "movie-properties" "apple-trailers" "vimeo" "skipto" "variable-rate"];
       subtitle-encoding = "UTF-8";
+    };
+
+    "org/gnome/calculator" = {
+      accuracy = 9;
+      angle-units = "degrees";
+      base = 10;
+      button-mode = "basic";
+      number-format = "automatic";
+      show-thousands = false;
+      show-zeroes = false;
+      source-currency = "";
+      source-units = "degree";
+      target-currency = "";
+      target-units = "radian";
+      window-maximized = false;
+      window-size = mkTuple [960 1048];
+      word-size = 64;
     };
 
     "org/gnome/calendar" = {
@@ -89,8 +113,8 @@ with lib.hm.gvariant; {
     };
 
     "org/gnome/control-center" = {
-      last-panel = "wifi";
-      window-state = mkTuple [980 640 false];
+      last-panel = "keyboard";
+      window-state = mkTuple [1286 857 false];
     };
 
     "org/gnome/desktop/app-folders" = {
@@ -119,6 +143,16 @@ with lib.hm.gvariant; {
       secondary-color = "#000000000000";
     };
 
+    "org/gnome/desktop/break-reminders/eyesight" = {
+      play-sound = true;
+    };
+
+    "org/gnome/desktop/break-reminders/movement" = {
+      duration-seconds = mkUint32 300;
+      interval-seconds = mkUint32 1800;
+      play-sound = true;
+    };
+
     "org/gnome/desktop/input-sources" = {
       sources = [(mkTuple ["xkb" "pt"]) (mkTuple ["xkb" "us"])];
       xkb-options = ["terminate:ctrl_alt_bksp"];
@@ -126,6 +160,8 @@ with lib.hm.gvariant; {
 
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
+      cursor-size = 24;
+      cursor-theme = "Adwaita";
       enable-animations = false;
       font-antialiasing = "grayscale";
       font-hinting = "slight";
@@ -136,6 +172,7 @@ with lib.hm.gvariant; {
 
     "org/gnome/desktop/notifications" = {
       application-children = ["org-gnome-settings" "firefox" "gnome-power-panel" "discord" "spotify" "thunderbird" "gnome-network-panel" "code" "slack" "org-gnome-screenshot" "zoom" "org-gnome-nautilus" "idea-ultimate" "code-url-handler" "kitty" "org-gnome-evince" "chromium-browser" "transmission-gtk" "brave-browser" "org-gnome-console" "ca-desrt-dconf-editor" "pavucontrol" "obsidian" "webcord" "org-gnome-epiphany"];
+      show-banners = true;
     };
 
     "org/gnome/desktop/notifications/application/brave-browser" = {
@@ -144,6 +181,10 @@ with lib.hm.gvariant; {
 
     "org/gnome/desktop/notifications/application/ca-desrt-dconf-editor" = {
       application-id = "ca.desrt.dconf-editor.desktop";
+    };
+
+    "org/gnome/desktop/notifications/application/calibre-ebook-edit" = {
+      application-id = "calibre-ebook-edit.desktop";
     };
 
     "org/gnome/desktop/notifications/application/chromium-browser" = {
@@ -210,6 +251,10 @@ with lib.hm.gvariant; {
       application-id = "org.gnome.Settings.desktop";
     };
 
+    "org/gnome/desktop/notifications/application/org-gnome-software" = {
+      application-id = "org.gnome.Software.desktop";
+    };
+
     "org/gnome/desktop/notifications/application/org-remmina-remmina" = {
       application-id = "org.remmina.Remmina.desktop";
     };
@@ -242,11 +287,17 @@ with lib.hm.gvariant; {
       application-id = "Zoom.desktop";
     };
 
+    "org/gnome/desktop/peripherals/keyboard" = {
+      numlock-state = true;
+    };
+
     "org/gnome/desktop/peripherals/mouse" = {
+      natural-scroll = true;
       speed = -0.242009;
     };
 
     "org/gnome/desktop/peripherals/touchpad" = {
+      speed = 0.0;
       tap-to-click = true;
       two-finger-scrolling-enabled = true;
     };
@@ -262,6 +313,10 @@ with lib.hm.gvariant; {
       picture-uri = "file:///home/vasco/.local/share/backgrounds/2023-03-06-01-40-06-crosswalk.jpg";
       primary-color = "#000000000000";
       secondary-color = "#000000000000";
+    };
+
+    "org/gnome/desktop/search-providers" = {
+      sort-order = ["org.gnome.Settings.desktop" "org.gnome.Contacts.desktop" "org.gnome.Nautilus.desktop"];
     };
 
     "org/gnome/desktop/session" = {
@@ -318,6 +373,7 @@ with lib.hm.gvariant; {
 
     "org/gnome/evince" = {
       document-directory = "file:///home/vasco/Documents/School/MEIC/CNV";
+      pictures-directory = "file:///home/vasco/Downloads";
     };
 
     "org/gnome/evince/default" = {
@@ -331,8 +387,8 @@ with lib.hm.gvariant; {
       sidebar-page = "links";
       sidebar-size = 384;
       sizing-mode = "free";
-      window-ratio = mkTuple [1.612697303435717 1.3873546425304968];
-      zoom = 0.37620972222222215;
+      window-ratio = mkTuple [1.612697 1.387355];
+      zoom = 0.37621;
     };
 
     "org/gnome/evolution-data-server" = {
@@ -385,6 +441,7 @@ with lib.hm.gvariant; {
 
     "org/gnome/nautilus/window-state" = {
       initial-size = mkTuple [1920 1168];
+      initial-size-file-chooser = mkTuple [890 550];
       maximized = false;
     };
 
@@ -423,6 +480,38 @@ with lib.hm.gvariant; {
       ignore-phase2-ca-cert = false;
     };
 
+    "org/gnome/portal/filechooser/armcord" = {
+      last-folder-path = "/home/vasco/Documents/Programming/github.com/wallpaper-rotater";
+    };
+
+    "org/gnome/portal/filechooser/brave-browser" = {
+      last-folder-path = "/tmp/arch";
+    };
+
+    "org/gnome/portal/filechooser/com/discordapp/Discord" = {
+      last-folder-path = "/home/vasco/Pictures/Webcam";
+    };
+
+    "org/gnome/portal/filechooser/gnome-background-panel" = {
+      last-folder-path = "/home/vasco/Pictures";
+    };
+
+    "org/gnome/portal/filechooser/md/obsidian/Obsidian" = {
+      last-folder-path = "/home/vasco/Documents/Notes";
+    };
+
+    "org/gnome/portal/filechooser/org/chromium/Chromium" = {
+      last-folder-path = "/home/vasco/Downloads";
+    };
+
+    "org/gnome/portal/filechooser/org/gnome/Settings" = {
+      last-folder-path = "/home/vasco/Pictures/Wallpapers/nordic-wallpapers/wallpapers";
+    };
+
+    "org/gnome/portal/filechooser/thunderbird" = {
+      last-folder-path = "/home/vasco/Downloads";
+    };
+
     "org/gnome/portal/filechooser/webcord" = {
       last-folder-path = "/home/vasco/Downloads";
     };
@@ -435,7 +524,7 @@ with lib.hm.gvariant; {
     };
 
     "org/gnome/settings-daemon/plugins/media-keys" = {
-      custom-keybindings = ["/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"];
+      custom-keybindings = ["/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"];
       help = [];
       logout = ["<Shift><Super>e"];
       next = ["XF86HangupPhone"];
@@ -448,7 +537,7 @@ with lib.hm.gvariant; {
 
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
       binding = "<Super>Return";
-      command = "ghostty -e \"tmux\"";
+      command = "footclient";
       name = "terminal";
     };
 
@@ -458,6 +547,12 @@ with lib.hm.gvariant; {
       name = "screenshot";
     };
 
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
+      binding = "<Super>d";
+      command = "albert toggle";
+      name = "albert";
+    };
+
     "org/gnome/settings-daemon/plugins/power" = {
       idle-dim = false;
       sleep-inactive-ac-type = "nothing";
@@ -465,12 +560,13 @@ with lib.hm.gvariant; {
     };
 
     "org/gnome/shell" = {
-      app-picker-layout = "[{'org.gnome.Contacts.desktop': <{'position': <0>}>, 'org.gnome.Weather.desktop': <{'position': <1>}>, 'org.gnome.clocks.desktop': <{'position': <2>}>, 'org.gnome.Maps.desktop': <{'position': <3>}>, 'org.gnome.Totem.desktop': <{'position': <4>}>, 'org.gnome.Calculator.desktop': <{'position': <5>}>, 'simple-scan.desktop': <{'position': <6>}>, 'org.gnome.Settings.desktop': <{'position': <7>}>, 'Alacritty.desktop': <{'position': <8>}>, 'gnome-system-monitor.desktop': <{'position': <9>}>, 'amazonPrimeVideo.desktop': <{'position': <10>}>, 'blueman-manager.desktop': <{'position': <11>}>, 'org.gnome.Photos.desktop': <{'position': <12>}>, 'org.gnome.Music.desktop': <{'position': <13>}>, 'Utilities': <{'position': <14>}>, 'ca.desrt.dconf-editor.desktop': <{'position': <15>}>, 'org.gnome.Calendar.desktop': <{'position': <16>}>, 'yelp.desktop': <{'position': <17>}>, 'org.gnome.Cheese.desktop': <{'position': <18>}>, 'firefox.desktop': <{'position': <19>}>, 'org.gnome.Extensions.desktop': <{'position': <20>}>, 'org.gnome.Geary.desktop': <{'position': <21>}>, 'htop.desktop': <{'position': <22>}>, 'hbo.desktop': <{'position': <23>}>}, {'com.github.iwalton3.jellyfin-media-player.desktop': <{'position': <0>}>, 'org.pipewire.Helvum.desktop': <{'position': <1>}>, 'kitty.desktop': <{'position': <2>}>, 'netflix.desktop': <{'position': <3>}>, 'nixos-manual.desktop': <{'position': <4>}>, 'pavucontrol.desktop': <{'position': <5>}>, 'org.gnome.Software.desktop': <{'position': <6>}>, 'com.stremio.Stremio.desktop': <{'position': <7>}>, 'org.gnome.TextEditor.desktop': <{'position': <8>}>, 'org.gnome.Tour.desktop': <{'position': <9>}>, 'one.alynx.showmethekey.desktop': <{'position': <10>}>, 'transmission-gtk.desktop': <{'position': <11>}>, 'io.github.TransmissionRemoteGtk.desktop': <{'position': <12>}>, 'virt-manager.desktop': <{'position': <13>}>, 'vlc.desktop': <{'position': <14>}>, 'nvim.desktop': <{'position': <15>}>, 'xterm.desktop': <{'position': <16>}>, 'Zoom.desktop': <{'position': <17>}>, 'wine-Programs-AltServer.desktop': <{'position': <18>}>, 'org.gnome.Epiphany.desktop': <{'position': <19>}>, 'calibre-gui.desktop': <{'position': <20>}>, 'calibre-ebook-edit.desktop': <{'position': <21>}>, 'calibre-ebook-viewer.desktop': <{'position': <22>}>, 'org.codeberg.dnkl.footclient.desktop': <{'position': <23>}>}, {'pt.gov.autenticacao.desktop': <{'position': <0>}>, 'org.codeberg.dnkl.foot-server.desktop': <{'position': <1>}>, 'calibre-lrfviewer.desktop': <{'position': <2>}>, 'sonixd.desktop': <{'position': <3>}>, 'net.lutris.Lutris.desktop': <{'position': <4>}>, 'winetricks.desktop': <{'position': <5>}>, 'idea-ultimate.desktop': <{'position': <6>}>, 'emacs.desktop': <{'position': <7>}>, 'emacsclient.desktop': <{'position': <8>}>}]";
+      command-history = ["lg"];
       disable-user-extensions = false;
-      disabled-extensions = ["windowsNavigator@gnome-shell-extensions.gcampax.github.com" "Vitals@CoreCoding.com" "tiling-assistant@leleat-on-github" "system-monitor@gnome-shell-extensions.gcampax.github.com" "trayIconsReloaded@selfmade.pl"];
-      enabled-extensions = ["launch-new-instance@gnome-shell-extensions.gcampax.github.com" "workspace-indicator@gnome-shell-extensions.gcampax.github.com" "user-theme@gnome-shell-extensions.gcampax.github.com" "appindicatorsupport@rgcjonas.gmail.com" "dash-to-dock@micxgx.gmail.com" "pop-shell@system76.com" "blur-my-shell@aunetx"];
+      disabled-extensions = ["windowsNavigator@gnome-shell-extensions.gcampax.github.com" "system-monitor@gnome-shell-extensions.gcampax.github.com" "pop-shell@system76.com" "blur-my-shell@aunetx" "trayIconsReloaded@selfmade.pl"];
+      enabled-extensions = ["launch-new-instance@gnome-shell-extensions.gcampax.github.com" "workspace-indicator@gnome-shell-extensions.gcampax.github.com" "user-theme@gnome-shell-extensions.gcampax.github.com" "dash-to-dock@micxgx.gmail.com" "appindicatorsupport@rgcjonas.gmail.com" "Vitals@CoreCoding.com" "tiling-assistant@leleat-on-github"];
       favorite-apps = [];
-      last-selected-power-profile = "power-saver";
+      last-selected-power-profile = "performance";
+      looking-glass-history = ["exit" "quit()" "global.compositor.backend.get_monitor_manager().experimental_hdr = 'on'" "global.compositor.backend.get_monitor_manager().experimental_hdr = 'off'"];
       remember-mount-password = false;
       welcome-dialog-last-shown-version = "43.2";
     };
@@ -538,21 +634,6 @@ with lib.hm.gvariant; {
       show-trash = false;
     };
 
-    "org/gnome/shell/extensions/pop-shell" = {
-      activate-launcher = ["<Super>d"];
-      active-hint = false;
-      active-hint-border-radius = mkUint32 2;
-      focus-left = ["<Super>h" "<Super>Left"];
-      gap-inner = mkUint32 0;
-      gap-outer = mkUint32 0;
-      hint-color-rgba = "rgba(233, 84, 32, 0.8)";
-      mouse-cursor-focus-location = mkUint32 1;
-      smart-gaps = true;
-      tile-by-default = true;
-      tile-enter = ["<Super>r"];
-      toggle-floating = ["<Super>Space"];
-    };
-
     "org/gnome/shell/extensions/tiling-assistant" = {
       activate-layout0 = [];
       activate-layout1 = [];
@@ -566,8 +647,9 @@ with lib.hm.gvariant; {
       debugging-show-tiled-rects = [];
       default-move-mode = 0;
       dynamic-keybinding-behaviour = 0;
+      focus-hint-color = "rgb(53,132,228)";
       import-layout-examples = false;
-      last-version-installed = 47;
+      last-version-installed = 52;
       restore-window = ["<Super>Down"];
       search-popup-layout = [];
       tile-bottom-half = ["<Super>KP_2"];
@@ -579,7 +661,7 @@ with lib.hm.gvariant; {
       tile-edit-mode = [];
       tile-left-half = ["<Super>Left" "<Super>KP_4"];
       tile-left-half-ignore-ta = [];
-      tile-maximize = ["<Super>Up" "<Super>KP_5"];
+      tile-maximize = ["<Super><Alt>f" "<Super>Up" "<Super>KP_5"];
       tile-maximize-horizontally = [];
       tile-maximize-vertically = [];
       tile-right-half = ["<Super>Right" "<Super>KP_6"];
@@ -744,6 +826,11 @@ with lib.hm.gvariant; {
       autoconnect = 1;
       scaling = 1;
       vm-window-size = mkTuple [1024 810];
+    };
+
+    "org/virt-manager/virt-manager/vms/c1d359f66d6b4989a4f97d63b0569ebc" = {
+      autoconnect = 1;
+      vm-window-size = mkTuple [1280 1011];
     };
 
     "org/virt-manager/virt-manager/vms/f666b52d1a454d88a98bb0adca5d03a6" = {

@@ -42,7 +42,7 @@
     envExtra = ''
       ENABLE_CORRECTION="true"
     '';
-    initExtra = ''
+    initContent = ''
       source ${pkgs.nix-index}/etc/profile.d/command-not-found.sh
 
       export PATH=$HOME/.config/emacs/bin:$PATH
