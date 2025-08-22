@@ -8,7 +8,6 @@
     age
     common
     doh
-    fingerprint
     fonts
     gc
     gnome
@@ -27,7 +26,6 @@
   security.pki.certificateFiles = ["${configDir}/certificates/ist.crt" "${configDir}/certificates/rnl.crt" "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"];
 
   boot.supportedFilesystems = ["ntfs" "zfs"];
-  boot.binfmt.emulatedSystems = ["armv6l-linux"];
 
   networking.hostId = "5e8c59c3";
 

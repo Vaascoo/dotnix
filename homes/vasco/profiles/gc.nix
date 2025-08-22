@@ -1,4 +1,4 @@
-{lib, ...}: let
+{...}: let
   gcOptions = {
     automatic = true;
     options = "-d";

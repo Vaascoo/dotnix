@@ -1,39 +1,41 @@
 {pkgs, ...}: let
+
   gnomeApps = with pkgs; [
-    gnome-system-monitor
-    gnome-screenshot
-    networkmanager-openvpn
-    gnome-tweaks
-    dconf-editor
     albert
+    dconf-editor
+    gnome-screenshot
+    gnome-system-monitor
+    gnome-tweaks
+    networkmanager-openvpn
+    pinentry-gnome3
   ];
 
   extensions = with pkgs.gnomeExtensions; [
-    tray-icons-reloaded
     appindicator
-    tiling-assistant
-    vitals
     dash-to-dock
+    paperwm
+    tiling-assistant
     tiling-shell
+    tray-icons-reloaded
+    vitals
   ];
+
 in {
-  environment.systemPackages = with pkgs;
-    [
-      pinentry-gnome3
-    ]
-    ++ gnomeApps
-    ++ extensions;
+  environment.systemPackages = gnomeApps ++ extensions;
 
   programs.dconf.enable = true;
-  services.dbus.enable = true;
-  services.libinput.enable = true;
-  services.power-profiles-daemon.enable = true;
-  services.xserver.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-  services.xserver.displayManager.gdm = {
-    enable = true;
-    autoSuspend = false;
-    wayland = true;
+
+  services = {
+    dbus.enable = true;
+    libinput.enable = true;
+    power-profiles-daemon.enable = true;
+    xserver.enable = true;
+    xserver.desktopManager.gnome.enable = true;
+    xserver.displayManager.gdm = {
+      enable = true;
+      autoSuspend = false;
+      wayland = true;
+    };
+    udev.packages = with pkgs; [gnome-settings-daemon];
   };
-  services.udev.packages = with pkgs; [gnome-settings-daemon];
 }

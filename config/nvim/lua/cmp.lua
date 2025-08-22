@@ -176,10 +176,11 @@ require('lspconfig')['eslint'].setup {
     "typescriptreact",
     "vue",
     "jsx",
-    "html"
+    "html",
   },
   capabilities = capabilities
 }
+
 require('lspconfig')['clangd'].setup {
   capabilities = capabilities
 }
@@ -259,5 +260,13 @@ require('lspconfig')['tinymist'].setup {
     "typst",
     "typ"
   },
+  capabilities = capabilities
+}
+
+require('lspconfig')['astro'].setup {
+  capabilities = capabilities
+}
+
+require('lspconfig')['tailwindcss'].setup {
   capabilities = capabilities
 }

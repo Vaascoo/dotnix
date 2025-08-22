@@ -1,11 +1,13 @@
 {
-  lib,
   inputs,
   configDir,
   profilesDir,
   modulesDir,
+  homesDir,
+  lib,
   ...
 }: let
+  inherit (inputs.home.lib) homeManagerConfiguration;
   inherit (inputs.home.nixosModules) home-manager;
   inherit (inputs.impermanence.nixosModules) impermanence;
   inherit (inputs.lanzaboote.nixosModules) lanzaboote;
@@ -40,40 +42,57 @@
     else [];
 
   mkProfiles = dir: let
-    mkLevel = entry: type:
-      if (lib.hasSuffix ".nix" entry && type == "regular")
-      then (import "${dir}/${entry}")
+    entries = builtins.readDir dir;
+
+    importEntry = name: type:
+      if type == "regular" && lib.hasSuffix ".nix" name
+      then import (dir + "/${name}")
       else if type == "directory"
-      then mkProfiles "${dir}/${entry}"
+      then mkProfiles (dir + "/${name}")
       else {};
-    doMagic = key: value:
-      lib.attrsets.nameValuePair
-      (lib.removeSuffix ".nix" key)
-      (mkLevel key value);
+
+    mkAttr = name: type:
+      lib.nameValuePair (lib.removeSuffix ".nix" name) (importEntry name type);
   in
-    lib.attrsets.mapAttrs' doMagic (builtins.readDir dir);
+    lib.mapAttrs' mkAttr entries;
+
+  mkHomes = dir: pkgs: let
+    entries = builtins.readDir dir;
+    subdirs = lib.filterAttrs (_: type: type == "directory") entries;
+    withHome = lib.filterAttrs (name: _: builtins.pathExists (dir + "/${name}/home.nix")) subdirs;
+  in
+    lib.mapAttrs
+    (name: _:
+      import (dir + "/${name}/home.nix") {
+        inherit lib pkgs;
+        profiles = mkProfiles (dir + "/${name}/profiles");
+      })
+    withHome;
 
   mkLinuxHost = hostDir: name: let
     system = "x86_64-linux";
-    hostModules = lib.vasco.importRecursive "${hostDir}/${name}";
+    hostModules = importRecursive "${hostDir}/${name}";
     commonModules = importRecursive "${modulesDir}";
     profiles = mkProfiles "${profilesDir}";
-    overlays = [
-      (final: prev: {
-        unstable = lib.vasco.mkPkgs inputs.unstable system [];
-        latest = lib.vasco.mkPkgs inputs.latest system [];
-      })
-      inputs.nur.overlays.default
-      inputs.agenix.overlays.default
-    ];
+    pkgs = mkPkgs inputs.nixpkgs system (mkOverlays system);
+    homes = mkHomes "${homesDir}" pkgs;
   in
     lib.nixosSystem {
-      inherit system;
-      pkgs = mkPkgs inputs.nixpkgs system overlays;
-      specialArgs = {inherit configDir inputs profiles;};
+      inherit system pkgs;
+      specialArgs = {inherit configDir homesDir inputs profiles;};
       modules =
         [
           {networking.hostName = name;}
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = {
+                inherit configDir;
+              };
+              users = homes;
+            };
+          }
           home-manager
           impermanence
           age
@@ -83,10 +102,37 @@
         ++ commonModules;
     };
 
-  mkHosts = hostDir: builder: let
+  builder = hostDir: builder: let
     hostList = dirEntries: lib.attrsets.filterAttrs (_: value: value == "directory") dirEntries;
   in
     lib.attrsets.mapAttrs (name: _: (builder hostDir name)) (hostList (builtins.readDir hostDir));
+
+  mkOverlays = system: [
+    (final: prev: {
+      unstable = mkPkgs inputs.unstable system [];
+      latest = mkPkgs inputs.latest system [];
+      inherit lib;
+    })
+    inputs.nur.overlays.default
+    inputs.agenix.overlays.default
+  ];
+
+  mkHomeManager = homeDir: userName: let
+    modules = importRecursive "${homeDir}/${userName}/modules";
+    profiles = mkProfiles "${homeDir}/${userName}/profiles";
+    entryPoint = let
+      homeFile = homeDir + "/${userName}/home.nix";
+    in
+      if (builtins.pathExists homeFile)
+      then (import homeFile)
+      else {};
+  in
+    forEachSystem (system:
+      homeManagerConfiguration {
+        pkgs = mkPkgs inputs.nixpkgs system (mkOverlays system);
+        modules = modules ++ [entryPoint];
+        extraSpecialArgs = {inherit configDir inputs profiles;};
+      });
 in {
-  inherit forEachSystem importRecursive mkLinuxHost mkHosts mkPkgs mkProfiles;
+  inherit forEachSystem builder importRecursive mkLinuxHost mkPkgs mkProfiles mkHomeManager mkHomes;
 }

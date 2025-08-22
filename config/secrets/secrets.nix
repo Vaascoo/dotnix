@@ -3,6 +3,5 @@ let
   raft = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMqYSdBgEOBpoB0eioYuCBiSN/OVlK4xX7dmJ6P9an9F";
 in {
   "wireguard.age".publicKeys = [vasco];
-  "runner.age".publicKeys = [vasco raft];
   "ovh.age".publicKeys = [vasco raft];
 }

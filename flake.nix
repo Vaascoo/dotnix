@@ -29,11 +29,13 @@
         configDir = ./config;
         profilesDir = ./profiles;
         modulesDir = ./modules;
+        homesDir = ./homes;
         lib = final;
       };
     });
   in {
-    nixosConfigurations = lib.vasco.mkHosts ./hosts lib.vasco.mkLinuxHost;
+    homeConfigurations = lib.vasco.builder ./homes lib.vasco.mkHomeManager;
+    nixosConfigurations = lib.vasco.builder ./hosts lib.vasco.mkLinuxHost;
     formatter = lib.vasco.forEachSystem (system: inputs.nixpkgs.legacyPackages.${system}.alejandra);
   };
 }

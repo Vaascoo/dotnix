@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{...}: {
   #TODO this will be moved from here
   services.nginx = {
     enable = true;

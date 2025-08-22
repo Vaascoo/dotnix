@@ -43,45 +43,35 @@
       ENABLE_CORRECTION="true"
     '';
     initContent = ''
-      source ${pkgs.nix-index}/etc/profile.d/command-not-found.sh
+            source ${pkgs.nix-index}/etc/profile.d/command-not-found.sh
 
-      export PATH=$HOME/.config/emacs/bin:$PATH
+            export PATH=$HOME/.config/emacs/bin:$PATH
 
-      evince() {
-        if [[ $@ > 0 ]]; then
-          ${pkgs.evince}/bin/evince $1 &>> /dev/null & disown
-        else
-          ${pkgs.evince}/bin/envice &>> /dev/null & disown
-        fi
-      }
-      bindkey -v
+            evince() {
+              if [[ $@ > 0 ]]; then
+                ${pkgs.evince}/bin/evince $1 &>> /dev/null & disown
+              else
+                ${pkgs.evince}/bin/envice &>> /dev/null & disown
+              fi
+            }
+            bindkey -v
+
+
+      if [[ $- == *i* ]] && [[ ! "$0" =~ "login" ]]; then
+          exec fish
+      fi
     '';
     shellAliases = {
       l = "ls -algh";
       ssh = "TERM=xterm-256color ssh";
       less = "bat --style=plain";
-      xcopy = "xclip -i -selection clipboard";
-      xpaste = "xclip -o";
       S = "exec $SHELL";
-      zathura = "evince";
-      programming = "cd ~/Documents/Programming";
-      nixconfig = "cd ~/.config/nix";
       tf = "terraform";
       k = "kubectl";
+      open = "xdg-open";
       ignore = "${pkgs.git-ignore}/bin/git-ignore $(${pkgs.git-ignore}/bin/git-ignore -l 2> /dev/null | ${pkgs.fzf}/bin/fzf -m)";
     };
 
-    plugins = [
-      {
-        name = "nix-zsh-completions";
-        file = "nix-zsh-completions.plugin.zsh";
-        src = pkgs.fetchFromGitHub {
-          owner = "spwhitt";
-          repo = "nix-zsh-completions";
-          rev = "0.4.4";
-          sha256 = "Djs1oOnzeVAUMrZObNLZ8/5zD7DjW3YK42SWpD2FPNk=";
-        };
-      }
-    ];
+    # plugins = [ pkgs.nix-zsh-completions ];
   };
 }

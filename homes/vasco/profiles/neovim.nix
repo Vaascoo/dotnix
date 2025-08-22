@@ -11,18 +11,20 @@
     typescript
   ];
   lsps = with pkgs; [
-    pyright
-    nil
-    sumneko-lua-language-server
-    rust-analyzer
+    ansible-language-server
+    astro-language-server
     clang-tools_15
+    crystalline
     gopls
     java-language-server
-    ansible-language-server
+    nil
+    pyright
+    rust-analyzer
+    sumneko-lua-language-server
+    tailwindcss-language-server
     terraform-lsp
     tinymist
     typst-fmt
-    crystalline
   ];
 
   cmpPlugins = with pkgs.vimPlugins; [
@@ -83,6 +85,11 @@ in {
           type = "lua";
           config = builtins.readFile "${configDir}/nvim/lua/term.lua";
         }
+        # {
+        #   plugin = zellij-nav-nvim;
+        #   type = "lua";
+        #   config = builtins.readFile "${configDir}/nvim/lua/zellij.lua";
+        # }
         {
           plugin = Navigator-nvim;
           type = "lua";
