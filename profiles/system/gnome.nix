@@ -1,5 +1,4 @@
 {pkgs, ...}: let
-
   gnomeApps = with pkgs; [
     albert
     dconf-editor
@@ -19,7 +18,6 @@
     tray-icons-reloaded
     vitals
   ];
-
 in {
   environment.systemPackages = gnomeApps ++ extensions;
 
